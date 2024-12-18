@@ -1,8 +1,7 @@
-import React from 'react'
 import {Typography} from 'antd'
 import {useTranslation} from 'react-i18next'
 
-const Home: React.FC = () => {
+const Todos = () => {
   const {t} = useTranslation()
 
   return (
@@ -13,4 +12,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default Todos

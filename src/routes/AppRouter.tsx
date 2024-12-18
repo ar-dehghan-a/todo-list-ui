@@ -1,15 +1,24 @@
-import React from 'react'
-import {Home} from '@/pages'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import withLoading from '@/hocs/withLoading.hoc'
 
-const AppRouter: React.FC = () => {
+// layouts
+import {MainLayout} from '@/components/layouts'
+
+// pages
+import {Todos} from '@/pages'
+
+const TodosPage = withLoading(Todos)
+
+const AppRouter = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<TodosPage />} />
+        </Route>
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 
