@@ -1,9 +1,10 @@
 import React from 'react'
-import {ConfigProvider as AntProvider, theme} from 'antd'
+import {ConfigProvider as AntProvider} from 'antd'
+import {ThemeProvider} from '@emotion/react'
 import {useTranslation} from 'react-i18next'
-import {themeConfig} from './config/theme'
 import AppRouter from './routes/AppRouter'
-import {useAppSelector} from './store'
+import {darkThemeConfig, lightThemeConfig} from './config/theme'
+import useTheme from './hooks/useTheme'
 
 // locales
 import enUS from 'antd/locale/en_US'
@@ -14,14 +15,19 @@ import 'antd/dist/reset.css'
 
 const App: React.FC = () => {
   const {i18n} = useTranslation()
-  const darkMode = useAppSelector(state => state.theme.darkMode)
+  const {isDarkMode} = useTheme()
 
   return (
     <AntProvider
       locale={i18n.language === 'fa' ? faIR : enUS}
-      theme={{...themeConfig, algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm}}
+      theme={{
+        ...(isDarkMode ? darkThemeConfig : lightThemeConfig),
+        cssVar: true,
+      }}
     >
-      <AppRouter />
+      <ThemeProvider theme={{dir: i18n.dir()}}>
+        <AppRouter />
+      </ThemeProvider>
     </AntProvider>
   )
 }
