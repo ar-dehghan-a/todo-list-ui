@@ -1,5 +1,5 @@
 import {useTranslation} from 'react-i18next'
-import type {LanguageCode} from '@/types/common'
+import type {LanguageCode} from '@/@types/common'
 
 export const useLanguage = (): {
   language: LanguageCode

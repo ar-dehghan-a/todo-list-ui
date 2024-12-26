@@ -1,6 +1,10 @@
 {
-  "welcome": "خوش آمدید",
-  "description": "این یک مثال از سایت دوزبانه است.",
-  "English": "انگلیسی",
-  "Persian": "فارسی"
+  "languages": {
+    "english": "انگلیسی",
+    "persian": "فارسی"
+  },
+  "sidebar": {
+    "todos": "کارها",
+    "important": "مهم"
+  }
 }

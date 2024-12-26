@@ -1,14 +1,14 @@
 import {Typography} from 'antd'
 import {useTranslation} from 'react-i18next'
 
-const Todos = () => {
+const Important = () => {
   const {t} = useTranslation()
 
   return (
     <div>
-      <Typography.Title>{t('sidebar.todos')}</Typography.Title>
+      <Typography.Title>{t('sidebar.important')}</Typography.Title>
     </div>
   )
 }
 
-export default Todos
+export default Important
