@@ -2,7 +2,7 @@ import {useQuery} from '@tanstack/react-query'
 import httpApi from '@/config/api'
 import API_ENDPOINTS from '../endpoints'
 
-// types
+// Types
 import {TodosResponse} from '@/@types/todo'
 
 // Fetch all todos
@@ -35,7 +35,7 @@ export const fetchTodos = async (params: {page: number; limit: number}) => {
 //   return data
 // }
 
-export const useTodos = (params: {page: number; limit: number} = {page: 1, limit: 10}) => {
+export const useTodos = (params: {page: number; limit: number} = {page: 1, limit: 50}) => {
   return useQuery({queryKey: ['todos'], queryFn: () => fetchTodos(params)})
 }
 

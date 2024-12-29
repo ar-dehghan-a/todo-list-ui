@@ -1,6 +1,6 @@
 import {Todo} from '..'
 
-// types
+// Types
 import {TodoItem} from '@/@types/todo'
 
 interface TodoListProps {

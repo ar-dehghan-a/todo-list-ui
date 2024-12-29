@@ -5,10 +5,12 @@ import withLoading from '@/hocs/withLoading.hoc'
 import {MainLayout} from '@/components/layouts'
 
 // pages
-import {Todos, Important} from '@/pages'
+import {Todos, Important, NotFound} from '@/pages'
 
 const TodosPage = withLoading(Todos)
 const ImportantPage = withLoading(Important)
+
+const NotFoundPage = withLoading(NotFound)
 
 const AppRouter = () => {
   return (
@@ -18,8 +20,8 @@ const AppRouter = () => {
           <Route index element={<Navigate to="/todos" />} />
           <Route path="todos" element={<TodosPage />} />
           <Route path="important" element={<ImportantPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   )

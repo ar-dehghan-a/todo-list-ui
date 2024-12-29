@@ -2,10 +2,10 @@ import {Typography} from 'antd'
 import {useTranslation} from 'react-i18next'
 import {useTodos} from '@/services/todos'
 
-// components
+// Components
 import {TodoList} from '@/components/common'
 
-// icons
+// Icons
 import {HomeOutlined} from '@ant-design/icons'
 
 const Todos = () => {

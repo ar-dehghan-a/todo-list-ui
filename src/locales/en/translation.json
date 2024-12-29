@@ -6,5 +6,15 @@
   "sidebar": {
     "todos": "Todos",
     "important": "Important"
+  },
+  "notFound": {
+    "title": "404",
+    "subTitle": "Sorry, the page you visited does not exist.",
+    "backHome": "Back Home"
+  },
+  "serverError": {
+    "title": "500",
+    "subTitle": "Sorry, something went wrong.",
+    "tryAgain": "Try Again"
   }
 }

@@ -6,5 +6,15 @@
   "sidebar": {
     "todos": "کارها",
     "important": "مهم"
+  },
+  "notFound": {
+    "title": "۴۰۴",
+    "subTitle": "متاسفانه صفحه مورد نظر شما وجود ندارد.",
+    "backHome": "بازگشت به خانه"
+  },
+  "serverError": {
+    "title": "۵۰۰",
+    "subTitle": "متاسفانه مشکلی پیش آمده است.",
+    "tryAgain": "دوباره امتحان کنید"
   }
 }
