@@ -1,8 +1,7 @@
 import {useState} from 'react'
 import {Outlet} from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
-import useTheme from '@/hooks/useTheme'
-import {useLanguage} from '@/hooks/useLanguage'
+import {useLanguage, useTheme} from '@/hooks'
 
 // components
 import {Layout as AntLayout, Button} from 'antd'

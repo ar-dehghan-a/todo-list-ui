@@ -24,7 +24,7 @@ export const Header = styled(AntLayout.Header)`
 `
 
 export const Content = styled(AntLayout.Content)`
-  padding: 24px;
+  padding: 12px 50px;
   min-height: 280px;
 `
 

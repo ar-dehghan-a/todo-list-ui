@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next'
 import type {LanguageCode} from '@/@types/common'
 
-export const useLanguage = (): {
+const useLanguage = (): {
   language: LanguageCode
   setLanguage: (locale: LanguageCode) => Promise<void>
   dir: 'ltr' | 'rtl'
@@ -29,3 +29,5 @@ export const useLanguage = (): {
     isRTL,
   }
 }
+
+export default useLanguage
