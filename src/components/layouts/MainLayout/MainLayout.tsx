@@ -48,16 +48,14 @@ const MainLayout = () => {
       </Sider>
       <AntLayout>
         <Header>
-          <Button color="default" variant="link" onClick={toggleLanguage} icon={<LanguageOutlined />}>
+          <Button color="default" variant="link" onClick={toggleLanguage}>
+            <LanguageOutlined />
             {language === 'en' ? t('languages.persian') : t('languages.english')}
           </Button>
 
-          <Button
-            color="default"
-            variant="link"
-            onClick={toggleThemeMode}
-            icon={isDarkMode ? <SunFilled /> : <MoonFilled />}
-          />
+          <Button color="default" variant="link" onClick={toggleThemeMode}>
+            {isDarkMode ? <SunFilled /> : <MoonFilled />}
+          </Button>
         </Header>
         <Content>
           <Outlet />

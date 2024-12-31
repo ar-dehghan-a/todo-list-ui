@@ -1,9 +1,10 @@
-import {useQuery} from '@tanstack/react-query'
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import httpApi from '@/config/api'
 import API_ENDPOINTS from '../endpoints'
+import QUERY_KEYS from '../queryKeys'
 
 // Types
-import {TodosResponse} from '@/@types/todo'
+import {TodosResponse, TodoResponse} from '@/@types/todo'
 
 // Fetch all todos
 export const fetchTodos = async (params: {page: number; limit: number}) => {
@@ -35,8 +36,20 @@ export const fetchTodos = async (params: {page: number; limit: number}) => {
 //   return data
 // }
 
+// Toggle completed todo
+export const toggleCompletedTodo = async (id: number) => {
+  const {data} = await httpApi.patch<TodoResponse>(API_ENDPOINTS.TODOS.TOGGLE_COMPLETED(id))
+  return data
+}
+
+// Toggle important todo
+export const toggleImportantTodo = async (id: number) => {
+  const {data} = await httpApi.patch<TodoResponse>(API_ENDPOINTS.TODOS.TOGGLE_IMPORTANT(id))
+  return data
+}
+
 export const useTodos = (params: {page: number; limit: number} = {page: 1, limit: 50}) => {
-  return useQuery({queryKey: ['todos'], queryFn: () => fetchTodos(params)})
+  return useQuery({queryKey: [QUERY_KEYS.TODOS], queryFn: () => fetchTodos(params)})
 }
 
 // export const useCreateTodo = () => {
@@ -62,3 +75,21 @@ export const useTodos = (params: {page: number; limit: number} = {page: 1, limit
 //     onSuccess: () => queryClient.invalidateQueries(['todos']),
 //   })
 // }
+
+export const useToggleCompletedTodo = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: toggleCompletedTodo,
+    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]}),
+  })
+}
+
+export const useToggleImportantTodo = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: toggleImportantTodo,
+    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]}),
+  })
+}

@@ -1,10 +1,12 @@
 const API_ENDPOINTS = {
   TODOS: {
     GET_ALL: '/todos',
-    GET_BY_ID: (id: string) => `/todos/${id}`,
+    GET_BY_ID: (id: number) => `/todos/${id}`,
     CREATE: '/todos',
-    UPDATE: (id: string) => `/todos/${id}`,
-    DELETE: (id: string) => `/todos/${id}`,
+    UPDATE: (id: number) => `/todos/${id}`,
+    DELETE: (id: number) => `/todos/${id}`,
+    TOGGLE_COMPLETED: (id: number) => `/todos/${id}/completed`,
+    TOGGLE_IMPORTANT: (id: number) => `/todos/${id}/important`,
   },
 }
 

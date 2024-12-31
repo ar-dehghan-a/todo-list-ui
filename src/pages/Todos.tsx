@@ -6,7 +6,7 @@ import {useTodos} from '@/services/todos'
 import {TodoList} from '@/components/common'
 
 // Icons
-import {HomeOutlined} from '@ant-design/icons'
+import {HomeFilled} from '@ant-design/icons'
 
 const Todos = () => {
   const {t} = useTranslation()
@@ -15,12 +15,12 @@ const Todos = () => {
 
   return (
     <div>
-      <Typography.Title>
-        <HomeOutlined style={{fontSize: '32px', marginInlineEnd: '16px'}} />
+      <Typography.Title level={2}>
+        <HomeFilled style={{marginInlineEnd: '12px'}} />
         {t('sidebar.todos')}
       </Typography.Title>
 
-      <TodoList todos={todos} onRemove={id => console.log(id)} onToggle={id => console.log(id)} />
+      <TodoList todos={todos} />
     </div>
   )
 }

@@ -30,7 +30,7 @@ const App = () => {
           cssVar: true,
         }}
       >
-        <ThemeProvider theme={{dir}}>
+        <ThemeProvider theme={{dir, isDarkMode}}>
           <ErrorBoundary FallbackComponent={ServerError}>
             <AppRouter />
           </ErrorBoundary>

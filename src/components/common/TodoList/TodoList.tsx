@@ -5,20 +5,13 @@ import {TodoItem} from '@/@types/todo'
 
 interface TodoListProps {
   todos: TodoItem[]
-  onToggle: (id: number) => void
-  onRemove: (id: number) => void
 }
 
-const TodoList = ({todos, onToggle, onRemove}: TodoListProps) => {
+const TodoList = ({todos}: TodoListProps) => {
   return (
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', gap: '6px'}}>
       {todos.map(todo => (
-        <Todo
-          key={todo.id}
-          todo={todo}
-          onToggle={() => onToggle(todo.id)}
-          onRemove={() => onRemove(todo.id)}
-        />
+        <Todo key={todo.id} todo={todo} />
       ))}
     </div>
   )

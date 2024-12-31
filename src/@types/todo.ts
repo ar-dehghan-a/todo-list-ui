@@ -1,7 +1,7 @@
 export interface TodoItem {
   id: number
   title: string
-  description?: string
+  note?: string
   isCompleted: boolean
   isImportant: boolean
   doneAt?: string
@@ -14,4 +14,9 @@ export interface TodosResponse {
   page: number
   limit: number
   total: number
+}
+
+export interface TodoResponse {
+  status: string
+  data: TodoItem
 }

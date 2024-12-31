@@ -20,12 +20,11 @@ export const Header = styled(AntLayout.Header)`
   justify-content: end;
   background-color: transparent;
   gap: 8px;
-  border-radius: 8px;
 `
 
 export const Content = styled(AntLayout.Content)`
-  padding: 12px 50px;
-  min-height: 280px;
+  padding: 16px 50px;
+  height: 100%;
 `
 
 export const ToggleButton = styled(Button)`
@@ -49,13 +48,13 @@ const animatedFade = keyframes`
 `
 
 export const SunFilled = styled(SunFilledIcon)`
-  font-size: 1.5rem !important;
+  font-size: 24px !important;
   color: #f6d447;
   animation: ${animatedFade} 0.5s ease-in-out;
 `
 
 export const MoonFilled = styled(MoonFilledIcon)`
-  font-size: 1.5rem !important;
+  font-size: 24px !important;
   color: #001529;
   animation: ${animatedFade} 0.5s ease-in-out;
 `
