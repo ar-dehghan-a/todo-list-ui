@@ -1,6 +1,20 @@
 {
-  "welcome": "خوش آمدید",
-  "description": "این یک مثال از سایت دوزبانه است.",
-  "English": "انگلیسی",
-  "Persian": "فارسی"
+  "languages": {
+    "english": "انگلیسی",
+    "persian": "فارسی"
+  },
+  "sidebar": {
+    "todos": "کارها",
+    "important": "مهم"
+  },
+  "notFound": {
+    "title": "۴۰۴",
+    "subTitle": "متاسفانه صفحه مورد نظر شما وجود ندارد.",
+    "backHome": "بازگشت به خانه"
+  },
+  "serverError": {
+    "title": "۵۰۰",
+    "subTitle": "متاسفانه مشکلی پیش آمده است.",
+    "tryAgain": "دوباره امتحان کنید"
+  }
 }

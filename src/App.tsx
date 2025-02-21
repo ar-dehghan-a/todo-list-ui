@@ -1,28 +1,42 @@
-import React from 'react'
-import {ConfigProvider as AntProvider, theme} from 'antd'
-import {ThemeProvider as EmotionProvider} from '@emotion/react'
-import {themeConfig} from './config/theme'
+import {lazy} from 'react'
+import {ConfigProvider as AntProvider} from 'antd'
+import {ThemeProvider} from '@emotion/react'
+import {QueryClientProvider} from '@tanstack/react-query'
+import {ErrorBoundary} from 'react-error-boundary'
 import AppRouter from './routes/AppRouter'
-import {useAppSelector} from './store'
+import {darkThemeConfig, lightThemeConfig} from './config/theme'
+import queryClient from './config/react-query'
+import {useLanguage, useTheme} from './features/app'
 
+const ServerError = lazy(() => import('./pages/ServerError'))
+
+// Locales
 import enUS from 'antd/locale/en_US'
 import faIR from 'antd/locale/fa_IR'
-import {useTranslation} from 'react-i18next'
 
-const App: React.FC = () => {
-  const {i18n} = useTranslation()
-  const {token} = theme.useToken()
-  const darkMode = useAppSelector(state => state.theme.darkMode)
+// Styles
+import 'antd/dist/reset.css'
+
+const App = () => {
+  const {isDarkMode} = useTheme()
+  const {language, dir} = useLanguage()
 
   return (
-    <AntProvider
-      locale={i18n.language === 'fa' ? faIR : enUS}
-      theme={{...themeConfig, algorithm: darkMode ? theme.darkAlgorithm : theme.compactAlgorithm}}
-    >
-      <EmotionProvider theme={token}>
-        <AppRouter />
-      </EmotionProvider>
-    </AntProvider>
+    <QueryClientProvider client={queryClient}>
+      <AntProvider
+        locale={language === 'en' ? enUS : faIR}
+        theme={{
+          ...(isDarkMode ? darkThemeConfig : lightThemeConfig),
+          cssVar: true,
+        }}
+      >
+        <ThemeProvider theme={{dir, isDarkMode}}>
+          <ErrorBoundary FallbackComponent={ServerError}>
+            <AppRouter />
+          </ErrorBoundary>
+        </ThemeProvider>
+      </AntProvider>
+    </QueryClientProvider>
   )
 }
 

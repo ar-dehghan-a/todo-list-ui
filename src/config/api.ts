@@ -2,9 +2,9 @@ import axios, {HttpStatusCode} from 'axios'
 import type {AxiosError, InternalAxiosRequestConfig} from 'axios'
 
 const httpApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {'Content-Type': 'application/json'},
-  timeout: 10000,
+  timeout: 5000,
 })
 
 const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
