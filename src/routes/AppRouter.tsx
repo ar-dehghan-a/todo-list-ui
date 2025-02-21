@@ -2,13 +2,14 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import withLoading from '@/hocs/withLoading.hoc'
 
 // layouts
-import {MainLayout} from '@/components/layouts'
+import {MainLayout} from '@/features/app'
 
 // pages
-import {Todos, Important, NotFound} from '@/pages'
+import {NotFound} from '@/pages'
+import {Todos} from '@/features/todos'
 
 const TodosPage = withLoading(Todos)
-const ImportantPage = withLoading(Important)
+const ImportantPage = withLoading(Todos)
 
 const NotFoundPage = withLoading(NotFound)
 

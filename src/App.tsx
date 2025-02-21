@@ -6,7 +6,7 @@ import {ErrorBoundary} from 'react-error-boundary'
 import AppRouter from './routes/AppRouter'
 import {darkThemeConfig, lightThemeConfig} from './config/theme'
 import queryClient from './config/react-query'
-import {useLanguage, useTheme} from './hooks'
+import {useLanguage, useTheme} from './features/app'
 
 const ServerError = lazy(() => import('./pages/ServerError'))
 

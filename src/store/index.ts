@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
-import themeSlice from './themeSlice'
+import {themeSlice} from '@/features/app'
 
 export const store = configureStore({
   reducer: {
