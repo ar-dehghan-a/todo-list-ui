@@ -1,8 +1,8 @@
-import {Typography} from 'antd'
 import {useTranslation} from 'react-i18next'
 import {useTodos} from '../services'
 
 // Components
+import {Page} from '@/features/app'
 import TodoList from '../components/TodoList'
 
 // Icons
@@ -14,14 +14,9 @@ const Todos = () => {
   const todos = data?.data || []
 
   return (
-    <div>
-      <Typography.Title level={2}>
-        <HomeFilled style={{marginInlineEnd: '12px'}} />
-        {t('sidebar.todos')}
-      </Typography.Title>
-
+    <Page title={t('sidebar.todos')} Icon={<HomeFilled />}>
       <TodoList todos={todos} />
-    </div>
+    </Page>
   )
 }
 

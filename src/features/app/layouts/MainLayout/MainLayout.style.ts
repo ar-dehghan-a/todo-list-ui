@@ -6,7 +6,7 @@ import {MoonFilled as MoonFilledIcon, SunFilled as SunFilledIcon} from '@ant-des
 export const Layout = styled(AntLayout)`
   width: 100%;
   height: 100vh;
-  padding: 8px;
+  padding: 8px 4px 8px 8px;
   gap: 16px;
 `
 
@@ -23,7 +23,7 @@ export const Header = styled(AntLayout.Header)`
 `
 
 export const Content = styled(AntLayout.Content)`
-  padding: 16px 50px;
+  padding-bottom: 16px;
   height: 100%;
 `
 

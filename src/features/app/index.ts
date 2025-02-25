@@ -1,5 +1,8 @@
 import themeSlice, {toggleTheme} from './store/themeSlice'
 
+// components
+export {default as Page} from './components/Page'
+
 // layouts
 export {default as MainLayout} from './layouts/MainLayout'
 
