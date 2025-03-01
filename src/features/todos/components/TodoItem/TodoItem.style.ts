@@ -4,12 +4,12 @@ import {Button} from 'antd'
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${({theme}) => (theme.isDarkMode ? '#2d2d2d' : '#fff')};
+  background-color: var(--todo-item-body-bg);
   border-radius: 8px;
   padding: 8px 12px;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: all 0.3s;
+  transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out);
 
   &:hover {
     border: 1px solid #c8c8c8;

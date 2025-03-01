@@ -3,19 +3,19 @@ import {useToggleCompletedTodo, useToggleImportantTodo} from '../../services'
 
 // Components
 import {Checkbox} from 'antd'
-import {Container, StarButton, Title} from './Todo.style'
+import {Container, StarButton, Title} from './TodoItem.style'
 
 // Icons
 import {StarFilled, StarOutlined} from '@ant-design/icons'
 
 // Types
-import {TodoItem} from '@/@types/todo'
+import type {Todo} from '@/@types/todo'
 
-interface TodoProps {
-  todo: TodoItem
+interface TodoItemProps {
+  todo: Todo
 }
 
-const Todo = ({todo: {id, title, isCompleted, isImportant}}: TodoProps) => {
+const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) => {
   const [localIsCompleted, setLocalIsCompleted] = useState(isCompleted)
   const [localIsImportant, setLocalIsImportant] = useState(isImportant)
 
@@ -53,4 +53,4 @@ const Todo = ({todo: {id, title, isCompleted, isImportant}}: TodoProps) => {
   )
 }
 
-export default Todo
+export default TodoItem

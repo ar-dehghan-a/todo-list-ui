@@ -1,24 +1,25 @@
 import styled from '@emotion/styled'
-import Todo from '../Todo'
+import TodoItem from '../TodoItem'
 
 // Types
-import {TodoItem} from '@/@types/todo'
+import type {Todo} from '@/@types/todo'
 
 interface TodoListProps {
-  todos: TodoItem[]
+  todos: Todo[]
 }
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-bottom: 60px;
 `
 
 const TodoList = ({todos}: TodoListProps) => {
   return (
     <Container>
       {todos.map(todo => (
-        <Todo key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </Container>
   )
