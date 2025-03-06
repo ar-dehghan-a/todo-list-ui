@@ -6,6 +6,7 @@ import useLanguage from '../../hooks/useLanguage'
 
 // components
 import {Layout as AntLayout, Button} from 'antd'
+import {TodoDrawer} from '@/features/todos'
 import SidebarMenu from '../../components/SidebarMenu'
 import {Content, Header, Layout, Sider, ToggleButton} from './MainLayout.style'
 
@@ -60,6 +61,7 @@ const MainLayout = () => {
         </Header>
         <Content>
           <Outlet />
+          <TodoDrawer />
         </Content>
       </AntLayout>
     </Layout>

@@ -16,5 +16,19 @@
     "title": "500",
     "subTitle": "Sorry, something went wrong.",
     "tryAgain": "Try Again"
+  },
+  "todos": {
+    "edit": {
+      "editTodo": "Edit Todo",
+      "title": "Title",
+      "note": "Note",
+      "completed": "Completed",
+      "important": "Important",
+      "deleteTodo": "Delete",
+      "deleteTodoConfirmationTitle": "Are you sure you want to delete this todo?",
+      "deleteTodoConfirmationDescription": "This action cannot be undone.",
+      "cancel": "Cancel",
+      "deleteTodoSuccess": "Todo deleted successfully"
+    }
   }
 }

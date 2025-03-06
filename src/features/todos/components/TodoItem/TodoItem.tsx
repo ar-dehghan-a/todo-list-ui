@@ -1,9 +1,13 @@
 import {useState} from 'react'
-import {useToggleCompletedTodo, useToggleImportantTodo} from '../../services'
+import {useAppDispatch} from '@/store'
+import {openDrawer} from '../../store/drawerSlice'
 
 // Components
 import {Checkbox} from 'antd'
 import {Container, StarButton, Title} from './TodoItem.style'
+
+// Services
+import {useToggleCompletedTodo, useToggleImportantTodo} from '../../services/mutations'
 
 // Icons
 import {StarFilled, StarOutlined} from '@ant-design/icons'
@@ -16,6 +20,7 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) => {
+  const dispatch = useAppDispatch()
   const [localIsCompleted, setLocalIsCompleted] = useState(isCompleted)
   const [localIsImportant, setLocalIsImportant] = useState(isImportant)
 
@@ -37,8 +42,10 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
     })
   }
 
+  const handleContainerClick = () => dispatch(openDrawer(id))
+
   return (
-    <Container onClick={() => console.log('Clicked')}>
+    <Container onClick={handleContainerClick}>
       <Checkbox
         checked={localIsCompleted}
         onClick={e => e.stopPropagation()}

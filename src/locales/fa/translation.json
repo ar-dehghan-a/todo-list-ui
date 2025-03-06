@@ -4,7 +4,7 @@
     "persian": "فارسی"
   },
   "sidebar": {
-    "todos": "کارها",
+    "todos": "تودوها",
     "important": "مهم"
   },
   "notFound": {
@@ -16,5 +16,19 @@
     "title": "۵۰۰",
     "subTitle": "متاسفانه مشکلی پیش آمده است.",
     "tryAgain": "دوباره امتحان کنید"
+  },
+  "todos": {
+    "edit": {
+      "editTodo": "ویرایش تودو",
+      "title": "عنوان",
+      "note": "یادداشت",
+      "completed": "انجام شده",
+      "important": "مهم",
+      "deleteTodo": "حذف",
+      "deleteTodoConfirmationTitle": "آیا مطمئن هستید که می‌خواهید این تودو را حذف کنید؟",
+      "deleteTodoConfirmationDescription": "این عملیات قابل بازگشت نیست.",
+      "cancel": "انصراف",
+      "deleteTodoSuccess": "تودو با موفقیت حذف شد"
+    }
   }
 }

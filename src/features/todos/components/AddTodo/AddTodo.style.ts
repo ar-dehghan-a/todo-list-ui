@@ -13,10 +13,11 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   display: flex;
+  align-items: center;
   gap: 8px;
+  padding: 0 8px;
   background-color: var(--todo-item-body-bg);
   border-radius: 6px;
-  padding: 10px;
   transition: all var(--ant-motion-duration-mid) var(--ant-motion-ease-in-out);
 
   button {
@@ -34,6 +35,7 @@ export const Form = styled.form`
     background-color: transparent;
     line-height: 1.25;
     outline: none;
+    padding: 12px 0 12px 8px;
   }
 `
 

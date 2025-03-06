@@ -1,5 +1,7 @@
 import {useTranslation} from 'react-i18next'
-import {useTodos} from '../services'
+
+// Services
+import {useTodos} from '../services/queries'
 
 // Components
 import {Page} from '@/features/app'
@@ -12,7 +14,7 @@ import {HomeFilled} from '@ant-design/icons'
 const Todos = () => {
   const {t} = useTranslation()
   const {data} = useTodos()
-  const todos = data?.data || []
+  const todos = data || []
 
   return (
     <Page title={t('sidebar.todos')} Icon={<HomeFilled />}>
