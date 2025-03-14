@@ -14,7 +14,6 @@ export const useTodoById = (id: number) => {
   return useQuery({
     queryFn: () => fetchTodoById(id),
     queryKey: [QUERY_KEYS.TODO, id],
-    select: data => data.data,
     enabled: !!id,
   })
 }

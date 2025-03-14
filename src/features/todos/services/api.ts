@@ -24,7 +24,7 @@ export const createTodo = async (todo: {title: string}) => {
 }
 
 // Update a todo
-export const updateTodo = async (id: number, updates: Partial<{title: string; note: string | null}>) => {
+export const updateTodo = async (id: number, updates: Partial<{title: string; note: string}>) => {
   const {data} = await httpApi.patch<ApiResponse<Todo>>(API_ENDPOINTS.TODOS.UPDATE(id), updates)
   return data
 }

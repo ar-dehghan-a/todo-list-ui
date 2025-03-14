@@ -3,6 +3,12 @@
     "english": "انگلیسی",
     "persian": "فارسی"
   },
+  "actions": {
+    "create": "ایجاد",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "cancel": "انصراف"
+  },
   "sidebar": {
     "todos": "تودوها",
     "important": "مهم"
@@ -19,16 +25,10 @@
   },
   "todos": {
     "edit": {
-      "editTodo": "ویرایش تودو",
-      "title": "عنوان",
-      "note": "یادداشت",
-      "completed": "انجام شده",
-      "important": "مهم",
-      "deleteTodo": "حذف",
       "deleteTodoConfirmationTitle": "آیا مطمئن هستید که می‌خواهید این تودو را حذف کنید؟",
       "deleteTodoConfirmationDescription": "این عملیات قابل بازگشت نیست.",
-      "cancel": "انصراف",
-      "deleteTodoSuccess": "تودو با موفقیت حذف شد"
+      "deleteTodoSuccess": "تودو با موفقیت حذف شد",
+      "createdAt": "ایجاد شده در {{date}}"
     }
   }
 }

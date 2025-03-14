@@ -6,15 +6,57 @@ const GlobalStyles = () => (
     styles={css`
       [data-theme='light'],
       :root {
+        --ant-layout-body-bg: #f5f5f5;
         --todo-item-body-bg: #ffffff;
       }
 
       [data-theme='dark'] {
+        --ant-layout-body-bg: #121212;
         --todo-item-body-bg: #2d2d2d;
       }
 
       [data-no-transition] * {
         transition: none !important;
+      }
+
+      @font-face {
+        font-family: 'Vazir';
+        src: url('../assets/fonts/Vazir-Thin-FD-WOL.woff2') format('woff2'),
+          url('../assets/fonts/Vazir-Thin-FD-WOL.woff') format('woff');
+        font-weight: 100;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Vazir';
+        src: url('../assets/fonts/Vazir-Light-FD-WOL.woff2') format('woff2'),
+          url('../assets/fonts/Vazir-Light-FD-WOL.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Vazir';
+        src: url('../assets/fonts/Vazir-FD-WOL.woff2') format('woff2'),
+          url('../assets/fonts/Vazir-FD-WOL.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Vazir';
+        src: url('../assets/fonts/Vazir-Medium-FD-WOL.woff2') format('woff2'),
+          url('../assets/fonts/Vazir-Medium-FD-WOL.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Vazir';
+        src: url('../assets/fonts/Vazir-Bold-FD-WOL.woff2') format('woff2'),
+          url('../assets/fonts/Vazir-Bold-FD-WOL.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
       }
     `}
   />

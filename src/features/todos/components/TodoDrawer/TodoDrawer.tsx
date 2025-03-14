@@ -1,16 +1,12 @@
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useAppDispatch, useAppSelector} from '@/store'
 import {closeDrawer} from '../../store/drawerSlice'
 import {useLanguage} from '@/features/app'
 
 // Components
-import {Button, Checkbox, Drawer, Form, Input, message, Popconfirm} from 'antd'
-
-// Form & Validation
-import {zodResolver} from '@hookform/resolvers/zod'
-import {Controller, useForm} from 'react-hook-form'
-import {z} from 'zod'
+import {Button, Input, message, Popconfirm} from 'antd'
+import {Drawer, TitleWrapper} from './TodoDrawer.style'
 
 // Services
 import {useTodoById} from '../../services/queries'
@@ -22,108 +18,184 @@ import {
 } from '../../services/mutations'
 
 // Icons
-import {DeleteOutlined} from '@ant-design/icons'
-
-const todoSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  note: z.string().optional(),
-})
-
-type TodoFormValues = z.infer<typeof todoSchema>
+import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
+import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
 
 const TodoDrawer = () => {
   const {t} = useTranslation()
   const {isRTL} = useLanguage()
   const dispatch = useAppDispatch()
   const {isOpen, selectedTodoId} = useAppSelector(state => state.drawer)
-  const {data: todo} = useTodoById(selectedTodoId || 0)
+
+  const titleRef = useRef<HTMLTextAreaElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const [titleHeight, setTitleHeight] = useState<number>(0)
+  const [title, setTitle] = useState('')
+  const [note, setNote] = useState('')
+  const [isEditing, setIsEditing] = useState(false)
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false)
+
+  const {data} = useTodoById(selectedTodoId || 0)
   const {mutate: updateTodo} = useUpdateTodo(selectedTodoId || 0)
   const {mutate: toggleImportantTodo} = useToggleImportantTodo()
   const {mutate: toggleCompletedTodo} = useToggleCompletedTodo()
   const {mutate: deleteTodo, isPending: isDeleting} = useDeleteTodo()
-  const [messageApi, contextHolder] = message.useMessage()
 
-  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false)
+  const todo = data?.data
 
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm<TodoFormValues>({
-    resolver: zodResolver(todoSchema),
-    values: {
-      title: todo?.title || '',
-      note: todo?.note || '',
-    },
-  })
-
-  const onSubmit = (values: TodoFormValues) => updateTodo(values)
-  const onClose = () => dispatch(closeDrawer())
-
+  const handleCloseDrawer = () => dispatch(closeDrawer())
   const handleOpenConfirm = () => setOpenDeleteConfirm(true)
   const handleCancelConfirm = () => setOpenDeleteConfirm(false)
 
-  const onDelete = () =>
+  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTitle(e.target.value)
+    const textarea = e.target
+    const scrollHeight = textarea.scrollHeight
+    textarea.style.height = `${scrollHeight}px`
+    setTitleHeight(scrollHeight)
+  }
+
+  const handleTitleClick = () => {
+    if (contentRef.current) {
+      setTitleHeight(contentRef.current.scrollHeight)
+      setIsEditing(true)
+    }
+  }
+
+  const handleTitleBlur = () => {
+    if (title === '') setTitle(todo?.title || '')
+    else if (title !== todo?.title) updateTodo({title})
+    setIsEditing(false)
+  }
+
+  const handleDelete = () =>
     deleteTodo(selectedTodoId || 0, {
       onSuccess: () => {
         handleCancelConfirm()
-        onClose()
-        messageApi.open({
-          type: 'success',
-          content: t('todos.edit.deleteTodoSuccess'),
-        })
+        handleCloseDrawer()
+        message.success(t('todos.edit.deleteTodoSuccess'))
       },
     })
 
-  return (
-    <Drawer
-      title={t('todos.edit.editTodo')}
-      placement={isRTL ? 'left' : 'right'}
-      onClose={onClose}
-      open={isOpen}
-    >
-      <Form onBlur={handleSubmit(onSubmit)} className="space-y-4">
-        <Form.Item
-          label={t('todos.edit.title')}
-          validateStatus={errors.title ? 'error' : ''}
-          help={errors.title?.message}
-        >
-          <Controller name="title" control={control} render={({field}) => <Input {...field} />} />
-        </Form.Item>
+  useEffect(() => {
+    setTitle(todo?.title || '')
+    setNote(todo?.note || '')
+  }, [todo])
 
-        <Form.Item
-          label={t('todos.edit.note')}
-          validateStatus={errors.note ? 'error' : ''}
-          help={errors.note?.message}
-        >
-          <Controller name="note" control={control} render={({field}) => <Input.TextArea {...field} />} />
-        </Form.Item>
-      </Form>
+  useEffect(() => {
+    if (isEditing && titleRef.current) {
+      titleRef.current.focus()
+      const length = titleRef.current.value.length
+      titleRef.current.setSelectionRange(length, length)
+    }
+  }, [isEditing])
 
-      <Checkbox checked={todo?.isCompleted} onClick={() => toggleCompletedTodo(selectedTodoId || 0)}>
-        {t('todos.edit.completed')}
-      </Checkbox>
+  const renderFooter = () => (
+    <>
+      <Button
+        type="text"
+        onClick={handleCloseDrawer}
+        icon={<PanelCloseOutlined style={{fontSize: '20px'}} />}
+      />
 
-      <Checkbox checked={todo?.isImportant} onClick={() => toggleImportantTodo(selectedTodoId || 0)}>
-        {t('todos.edit.important')}
-      </Checkbox>
+      <div className="ant-drawer-footer-text">
+        {todo?.createdAt &&
+          `${t('todos.edit.createdAt', {
+            date: new Date(todo.createdAt).toLocaleDateString(isRTL ? 'fa-IR' : 'en-US', {
+              weekday: 'short',
+              month: 'short',
+              day: 'numeric',
+            }),
+          })}`}
+      </div>
 
       <Popconfirm
         title={t('todos.edit.deleteTodoConfirmationTitle')}
         description={t('todos.edit.deleteTodoConfirmationDescription')}
         open={openDeleteConfirm}
-        onConfirm={onDelete}
-        okButtonProps={{loading: isDeleting}}
+        onConfirm={handleDelete}
         onCancel={handleCancelConfirm}
-        okText={t('todos.edit.deleteTodo')}
-        cancelText={t('todos.edit.cancel')}
+        okText={t('actions.delete')}
+        okButtonProps={{loading: isDeleting, type: 'primary', danger: true}}
+        cancelText={t('actions.cancel')}
+        cancelButtonProps={{disabled: isDeleting}}
       >
-        <Button danger onClick={handleOpenConfirm} icon={<DeleteOutlined />}>
-          {t('todos.edit.deleteTodo')}
-        </Button>
+        <Button
+          danger
+          type="text"
+          onClick={handleOpenConfirm}
+          icon={<DeleteOutlined style={{fontSize: '18px'}} />}
+        />
       </Popconfirm>
+    </>
+  )
 
-      {contextHolder}
+  return (
+    <Drawer
+      closeIcon={false}
+      destroyOnClose
+      open={isOpen}
+      onClose={handleCloseDrawer}
+      placement={isRTL ? 'left' : 'right'}
+      footer={renderFooter()}
+    >
+      <div>
+        <TitleWrapper>
+          <Button
+            type="text"
+            style={{flexShrink: 0}}
+            onClick={() => toggleCompletedTodo(selectedTodoId || 0)}
+            icon={
+              todo?.isCompleted ? (
+                <CheckCircleFilled style={{fontSize: '20px', color: 'var(--ant-color-primary)'}} />
+              ) : (
+                <CircleOutlined style={{fontSize: '22px'}} />
+              )
+            }
+          />
+
+          <div className="title">
+            <div className="content" draggable={false} ref={contentRef}>
+              {isEditing ? (
+                <div className="edit">
+                  <textarea
+                    ref={titleRef}
+                    value={title}
+                    style={{height: `${titleHeight}px`}}
+                    className="content-textarea"
+                    onChange={handleTitleChange}
+                    onBlur={handleTitleBlur}
+                  />
+                </div>
+              ) : (
+                <span onClick={handleTitleClick}>{title}</span>
+              )}
+            </div>
+          </div>
+
+          <Button
+            type="text"
+            style={{flexShrink: 0}}
+            onClick={() => toggleImportantTodo(selectedTodoId || 0)}
+            icon={
+              todo?.isImportant ? (
+                <StarFilled style={{color: 'var(--ant-color-link)', fontSize: '20px'}} />
+              ) : (
+                <StarOutlined style={{color: 'var(--ant-color-link)', fontSize: '20px'}} />
+              )
+            }
+          />
+        </TitleWrapper>
+
+        {/* <Input.TextArea
+          onBlur={() => {
+            if (field.value !== todo?.note) {
+              updateTodo({title: todo?.title || '', note: field.value})
+            }
+          }}
+        /> */}
+      </div>
     </Drawer>
   )
 }
