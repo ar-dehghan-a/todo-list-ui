@@ -21,16 +21,18 @@ import {
 import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
 
+// Types
+import type {TextAreaRef} from 'antd/es/input/TextArea'
+
 const TodoDrawer = () => {
   const {t} = useTranslation()
   const {isRTL} = useLanguage()
   const dispatch = useAppDispatch()
   const {isOpen, selectedTodoId} = useAppSelector(state => state.drawer)
 
-  const titleRef = useRef<HTMLTextAreaElement>(null)
+  const titleRef = useRef<TextAreaRef>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const [titleHeight, setTitleHeight] = useState<number>(0)
   const [title, setTitle] = useState('')
   const [note, setNote] = useState('')
   const [isEditing, setIsEditing] = useState(false)
@@ -48,25 +50,18 @@ const TodoDrawer = () => {
   const handleOpenConfirm = () => setOpenDeleteConfirm(true)
   const handleCancelConfirm = () => setOpenDeleteConfirm(false)
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTitle(e.target.value)
-    const textarea = e.target
-    const scrollHeight = textarea.scrollHeight
-    textarea.style.height = `${scrollHeight}px`
-    setTitleHeight(scrollHeight)
-  }
+  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)
+  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNote(e.target.value)
 
-  const handleTitleClick = () => {
-    if (contentRef.current) {
-      setTitleHeight(contentRef.current.scrollHeight)
-      setIsEditing(true)
-    }
-  }
+  const handleTitleClick = () => setIsEditing(true)
 
   const handleTitleBlur = () => {
     if (title === '') setTitle(todo?.title || '')
     else if (title !== todo?.title) updateTodo({title})
     setIsEditing(false)
+  }
+  const handleNoteBlur = () => {
+    if (note !== todo?.note) updateTodo({note})
   }
 
   const handleDelete = () =>
@@ -84,10 +79,10 @@ const TodoDrawer = () => {
   }, [todo])
 
   useEffect(() => {
-    if (isEditing && titleRef.current) {
+    if (isEditing && titleRef.current?.resizableTextArea) {
       titleRef.current.focus()
-      const length = titleRef.current.value.length
-      titleRef.current.setSelectionRange(length, length)
+      const length = titleRef.current.resizableTextArea.textArea.value.length
+      titleRef.current.resizableTextArea.textArea.setSelectionRange(length, length)
     }
   }, [isEditing])
 
@@ -159,10 +154,10 @@ const TodoDrawer = () => {
             <div className="content" draggable={false} ref={contentRef}>
               {isEditing ? (
                 <div className="edit">
-                  <textarea
+                  <Input.TextArea
                     ref={titleRef}
                     value={title}
-                    style={{height: `${titleHeight}px`}}
+                    autoSize
                     className="content-textarea"
                     onChange={handleTitleChange}
                     onBlur={handleTitleBlur}
@@ -188,13 +183,17 @@ const TodoDrawer = () => {
           />
         </TitleWrapper>
 
-        {/* <Input.TextArea
-          onBlur={() => {
-            if (field.value !== todo?.note) {
-              updateTodo({title: todo?.title || '', note: field.value})
-            }
-          }}
-        /> */}
+        <br />
+
+        <Input.TextArea
+          value={note}
+          onChange={handleNoteChange}
+          onBlur={handleNoteBlur}
+          placeholder={t('todos.edit.notePlaceholder')}
+          autoSize={{minRows: 3, maxRows: 5}}
+          showCount
+          maxLength={250}
+        />
       </div>
     </Drawer>
   )

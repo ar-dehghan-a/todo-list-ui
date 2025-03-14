@@ -28,7 +28,8 @@
       "deleteTodoConfirmationTitle": "آیا مطمئن هستید که می‌خواهید این تودو را حذف کنید؟",
       "deleteTodoConfirmationDescription": "این عملیات قابل بازگشت نیست.",
       "deleteTodoSuccess": "تودو با موفقیت حذف شد",
-      "createdAt": "ایجاد شده در {{date}}"
+      "createdAt": "ایجاد شده در {{date}}",
+      "notePlaceholder": "یادداشتی اضافه کنید"
     }
   }
 }

@@ -36,8 +36,6 @@ export const TitleWrapper = styled.div`
   .title {
     position: relative;
     border-radius: 6px;
-    font-weight: 500;
-    font-size: 1.125rem;
     flex: 1 1 0px;
 
     .content {
@@ -53,6 +51,8 @@ export const TitleWrapper = styled.div`
 
       span {
         display: block;
+        font-weight: 500;
+        font-size: 1.125rem;
       }
 
       .edit {
@@ -65,11 +65,13 @@ export const TitleWrapper = styled.div`
         width: 100%;
         border: none;
         background: transparent;
-        resize: none;
         padding: 0;
         display: block;
         font-weight: 500;
-        overflow: hidden;
+        font-size: 1.125rem;
+        border-radius: 0;
+        box-shadow: none;
+        line-height: 1.15;
 
         &:focus {
           outline: none;
