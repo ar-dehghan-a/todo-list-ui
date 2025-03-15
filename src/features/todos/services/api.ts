@@ -6,7 +6,14 @@ import type {ApiResponse} from '@/@types/common'
 import type {Todo, TodosResponse} from '@/@types/todo'
 
 // Fetch all todos
-export const fetchTodos = async (params: {page: number; limit: number}) => {
+export const fetchTodos = async (
+  params: {
+    page?: number
+    limit?: number
+    isImportant?: boolean
+    isCompleted?: boolean
+  } = {page: 1, limit: 50}
+) => {
   const {data} = await httpApi.get<TodosResponse>(API_ENDPOINTS.TODOS.GET_ALL, {params})
   return data
 }
@@ -18,7 +25,7 @@ export const fetchTodoById = async (id: number) => {
 }
 
 // Create a new todo
-export const createTodo = async (todo: {title: string}) => {
+export const createTodo = async (todo: {title: string; isImportant?: boolean}) => {
   const {data} = await httpApi.post<ApiResponse<Todo>>(API_ENDPOINTS.TODOS.CREATE, todo)
   return data
 }

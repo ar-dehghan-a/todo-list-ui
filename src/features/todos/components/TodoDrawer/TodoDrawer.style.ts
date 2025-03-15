@@ -27,7 +27,7 @@ export const TitleWrapper = styled.div`
   position: sticky;
   top: 0;
   background: var(--todo-item-body-bg);
-  border-radius: 6px 6px 0 0;
+  border-radius: 8px 8px 0 0;
 
   display: flex;
   align-items: center;

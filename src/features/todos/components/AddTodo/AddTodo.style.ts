@@ -35,7 +35,7 @@ export const Form = styled.form`
     background-color: transparent;
     line-height: 1.25;
     outline: none;
-    padding: 12px 0 12px 8px;
+    padding: 14px 0 14px 8px;
   }
 `
 

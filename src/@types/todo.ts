@@ -11,7 +11,9 @@ export interface Todo {
 export interface TodosResponse {
   status: string
   data: Todo[]
-  page: number
-  limit: number
-  total: number
+  meta: {
+    page: number
+    limit: number
+    total: number
+  }
 }

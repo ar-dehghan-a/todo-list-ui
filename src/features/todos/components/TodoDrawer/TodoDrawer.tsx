@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useAppDispatch, useAppSelector} from '@/store'
 import {closeDrawer} from '../../store/drawerSlice'
-import {useLanguage} from '@/features/app'
+import {useLanguage} from '@/hooks'
 
 // Components
 import {Button, Input, message, Popconfirm} from 'antd'
@@ -23,7 +23,6 @@ import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
 
 // Types
 import type {TextAreaRef} from 'antd/es/input/TextArea'
-
 const TodoDrawer = () => {
   const {t} = useTranslation()
   const {isRTL} = useLanguage()
@@ -60,8 +59,10 @@ const TodoDrawer = () => {
     else if (title !== todo?.title) updateTodo({title})
     setIsEditing(false)
   }
+
   const handleNoteBlur = () => {
-    if (note !== todo?.note) updateTodo({note})
+    if (note === '') setNote(todo?.note || '')
+    else if (note !== todo?.note) updateTodo({note})
   }
 
   const handleDelete = () =>

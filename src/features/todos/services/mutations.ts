@@ -20,7 +20,7 @@ export const useUpdateTodo = (id: number) => {
   return useMutation({
     mutationFn: (updates: Partial<{title: string; note: string}>) => updateTodo(id, updates),
     onSuccess: result => {
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODO, id]}, result)
+      queryClient.setQueryData([QUERY_KEYS.TODO, id], result)
       queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
         return {
           ...oldData,
@@ -48,7 +48,7 @@ export const useToggleCompletedTodo = () => {
   return useMutation({
     mutationFn: toggleCompletedTodo,
     onSuccess: result => {
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODO, result.data.id]}, result)
+      queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
       queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
         return {
           ...oldData,
@@ -65,7 +65,7 @@ export const useToggleImportantTodo = () => {
   return useMutation({
     mutationFn: toggleImportantTodo,
     onSuccess: result => {
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODO, result.data.id]}, result)
+      queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
       queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
         return {
           ...oldData,

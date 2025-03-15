@@ -5,11 +5,11 @@ import withLoading from '@/hocs/withLoading.hoc'
 import {MainLayout} from '@/features/app'
 
 // pages
-import {NotFound} from '@/pages'
-import {Todos} from '@/features/todos'
+import {NotFound} from '@/features/app'
+import {Important, Todos} from '@/features/todos'
 
 const TodosPage = withLoading(Todos)
-const ImportantPage = withLoading(Todos)
+const ImportantPage = withLoading(Important)
 
 const NotFoundPage = withLoading(NotFound)
 

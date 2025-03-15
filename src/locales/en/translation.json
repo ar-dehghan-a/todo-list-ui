@@ -24,12 +24,16 @@
     "tryAgain": "Try Again"
   },
   "todos": {
+    "add": {
+      "placeholder": "Add a new todo..."
+    },
     "edit": {
       "deleteTodoConfirmationTitle": "Are you sure you want to delete this todo?",
       "deleteTodoConfirmationDescription": "This action cannot be undone.",
       "deleteTodoSuccess": "Todo deleted successfully",
       "createdAt": "Created on {{date}}",
       "notePlaceholder": "Add a note"
-    }
+    },
+    "empty": "No todos found"
   }
 }

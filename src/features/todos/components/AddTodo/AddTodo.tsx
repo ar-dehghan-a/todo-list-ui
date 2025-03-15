@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useTranslation} from 'react-i18next'
 
 // Components
 import {Button} from 'antd'
@@ -10,7 +11,8 @@ import {useCreateTodo} from '../../services/mutations'
 // Icons
 import {PlusOutlined} from '@ant-design/icons'
 
-const AddTodo = () => {
+const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => {
+  const {t} = useTranslation()
   const [title, setTitle] = useState('')
 
   const {mutate: createTodo, isPending} = useCreateTodo()
@@ -21,7 +23,10 @@ const AddTodo = () => {
     if (!title.trim()) return
 
     createTodo(
-      {title},
+      {
+        title,
+        ...(createAsImportant ? {isImportant: true} : {}),
+      },
       {
         onSuccess() {
           setTitle('')
@@ -39,7 +44,7 @@ const AddTodo = () => {
           disabled={isPending}
           name="todo"
           autoComplete="false"
-          placeholder="Add a new todo..."
+          placeholder={t('todos.add.placeholder')}
           value={title}
           onChange={e => setTitle(e.target.value)}
         />

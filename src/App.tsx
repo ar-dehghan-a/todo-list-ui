@@ -1,14 +1,12 @@
-import {lazy} from 'react'
 import {ConfigProvider as AntProvider} from 'antd'
-import {ThemeProvider} from '@emotion/react'
 import {QueryClientProvider} from '@tanstack/react-query'
+import {ThemeProvider} from '@emotion/react'
 import {ErrorBoundary} from 'react-error-boundary'
 import AppRouter from './routes/AppRouter'
-import {darkThemeConfig, lightThemeConfig} from './config/theme'
 import queryClient from './config/react-query'
-import {useLanguage, useTheme, useThemeWatcher} from '@/features/app'
-
-const ServerError = lazy(() => import('./pages/ServerError'))
+import {darkThemeConfig, lightThemeConfig} from './config/theme'
+import {useLanguage} from './hooks'
+import {ServerError, useTheme, useThemeWatcher} from '@/features/app'
 
 // Locales
 import enUS from 'antd/locale/en_US'
