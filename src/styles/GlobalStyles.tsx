@@ -58,6 +58,10 @@ const GlobalStyles = () => (
         font-weight: 700;
         font-style: normal;
       }
+
+      .ant-message-notice-content {
+        font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+      }
     `}
   />
 )

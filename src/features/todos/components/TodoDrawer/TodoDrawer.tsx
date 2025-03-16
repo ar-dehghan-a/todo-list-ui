@@ -92,7 +92,7 @@ const TodoDrawer = () => {
       <Button
         type="text"
         onClick={handleCloseDrawer}
-        icon={<PanelCloseOutlined style={{fontSize: '20px'}} />}
+        icon={<PanelCloseOutlined style={{fontSize: '20px', rotate: isRTL ? '180deg' : '0deg'}} />}
       />
 
       <div className="ant-drawer-footer-text">
