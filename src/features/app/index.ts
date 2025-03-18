@@ -6,6 +6,8 @@ export {default as ServerError} from './pages/ServerError'
 
 // components
 export {default as Page} from './components/Page'
+export {default as SwitchLanguage} from './components/SwitchLanguage'
+export {default as SwitchThemeMode} from './components/SwitchThemeMode'
 
 // layouts
 export {default as MainLayout} from './layouts/MainLayout'
