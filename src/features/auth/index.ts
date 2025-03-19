@@ -1,3 +1,5 @@
+import authSlice from './store/authSlice'
+
 // pages
 export {default as Login} from './pages/Login'
 
@@ -5,4 +7,7 @@ export {default as Login} from './pages/Login'
 export {default as AuthLayout} from './layouts/AuthLayout'
 
 // hooks
-export {useAuth} from './hooks/useAuth'
+export {default as useAuth} from './hooks/useAuth'
+
+// store
+export {authSlice}

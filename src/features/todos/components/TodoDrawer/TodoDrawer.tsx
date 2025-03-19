@@ -23,6 +23,7 @@ import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
 
 // Types
 import type {TextAreaRef} from 'antd/es/input/TextArea'
+
 const TodoDrawer = () => {
   const {t} = useTranslation()
   const {isRTL} = useLanguage()

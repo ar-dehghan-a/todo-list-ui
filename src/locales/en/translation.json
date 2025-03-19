@@ -23,6 +23,31 @@
     "subTitle": "Sorry, something went wrong.",
     "tryAgain": "Try Again"
   },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "signIn": "Sign In",
+      "forgotPassword": "Forgot Password?",
+      "signUpLink": "Don't have an account? <a>Sign up</a>",
+      "validation": {
+        "email": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email"
+        },
+        "password": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 8 characters"
+        }
+      },
+      "success": "Sign In successful!",
+      "error": {
+        "incorrectCredentials": "Email or password is incorrect",
+        "serverError": "Server error. Please try again."
+      }
+    }
+  },
   "todos": {
     "add": {
       "placeholder": "Add a new todo..."
