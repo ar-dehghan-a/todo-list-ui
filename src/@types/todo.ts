@@ -1,4 +1,4 @@
-export interface TodoItem {
+export interface Todo {
   id: number
   title: string
   note?: string
@@ -10,13 +10,10 @@ export interface TodoItem {
 
 export interface TodosResponse {
   status: string
-  data: TodoItem[]
-  page: number
-  limit: number
-  total: number
-}
-
-export interface TodoResponse {
-  status: string
-  data: TodoItem
+  data: Todo[]
+  meta: {
+    page: number
+    limit: number
+    total: number
+  }
 }

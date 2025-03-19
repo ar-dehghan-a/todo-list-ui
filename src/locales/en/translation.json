@@ -3,6 +3,12 @@
     "english": "English",
     "persian": "Persian"
   },
+  "actions": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
   "sidebar": {
     "todos": "Todos",
     "important": "Important"
@@ -16,5 +22,78 @@
     "title": "500",
     "subTitle": "Sorry, something went wrong.",
     "tryAgain": "Try Again"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "signIn": "Sign In",
+      "forgotPassword": "Forgot Password?",
+      "signUpLink": "Don't have an account? Sign Up",
+      "validation": {
+        "email": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email"
+        },
+        "password": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 8 characters"
+        }
+      },
+      "success": "Sign In successful!",
+      "error": {
+        "incorrectCredentials": "Email or password is incorrect",
+        "serverError": "Server error. Please try again."
+      }
+    },
+    "register": {
+      "title": "Create an account",
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "signUp": "Sign Up",
+      "alreadyHaveAccount": "Already have an account? Sign In",
+      "validation": {
+        "name": {
+          "required": "Name is required"
+        },
+        "surname": {
+          "required": "Surname is required"
+        },
+        "email": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email"
+        },
+        "password": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+          "required": "Confirm Password is required",
+          "match": "Passwords do not match"
+        }
+      },
+      "success": "Sign Up successful!",
+      "error": {
+        "emailExists": "Email already exists",
+        "serverError": "Server error. Please try again."
+      }
+    }
+  },
+  "todos": {
+    "add": {
+      "placeholder": "Add a new todo..."
+    },
+    "edit": {
+      "deleteTodoConfirmationTitle": "Are you sure you want to delete this todo?",
+      "deleteTodoConfirmationDescription": "This action cannot be undone.",
+      "deleteTodoSuccess": "Todo deleted successfully",
+      "createdAt": "Created on {{date}}",
+      "notePlaceholder": "Add a note"
+    },
+    "empty": "No todos found"
   }
 }

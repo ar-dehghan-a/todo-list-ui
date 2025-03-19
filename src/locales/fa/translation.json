@@ -3,8 +3,14 @@
     "english": "انگلیسی",
     "persian": "فارسی"
   },
+  "actions": {
+    "create": "ایجاد",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "cancel": "انصراف"
+  },
   "sidebar": {
-    "todos": "کارها",
+    "todos": "تودوها",
     "important": "مهم"
   },
   "notFound": {
@@ -16,5 +22,73 @@
     "title": "۵۰۰",
     "subTitle": "متاسفانه مشکلی پیش آمده است.",
     "tryAgain": "دوباره امتحان کنید"
+  },
+  "auth": {
+    "login": {
+      "title": "به صفحه ورود خوش آمدید",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "signIn": "ورود",
+      "forgotPassword": "رمز عبور خود را فراموش کردید؟",
+      "signUpLink": "هنوز حساب کاربری ندارید؟ ثبت نام کنید",
+      "validation": {
+        "email": {
+          "required": "ایمیل الزامی است",
+          "invalid": "لطفا یک ایمیل معتبر وارد کنید"
+        },
+        "password": {
+          "required": "رمز عبور الزامی است",
+          "minLength": "رمز عبور باید حداقل ۸ کاراکتر باشد"
+        }
+      },
+      "success": "ورود با موفقیت انجام شد",
+      "error": {
+        "incorrectCredentials": "ایمیل یا رمز عبور اشتباه است",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      }
+    },
+    "register": {
+      "title": "ثبت نام",
+      "name": "نام",
+      "surname": "نام خانوادگی",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "confirmPassword": "تایید رمز عبور",
+      "signUp": "ثبت نام",
+      "alreadyHaveAccount": "قبلا حساب کاربری دارید؟ ورود",
+      "validation": {
+        "name": {
+          "required": "نام الزامی است"
+        },
+        "surname": {
+          "required": "نام خانوادگی الزامی است"
+        },
+        "email": {
+          "required": "ایمیل الزامی است",
+          "invalid": "لطفا یک ایمیل معتبر وارد کنید"
+        },
+        "password": {
+          "required": "رمز عبور الزامی است",
+          "minLength": "رمز عبور باید حداقل ۸ کاراکتر باشد"
+        },
+        "confirmPassword": {
+          "required": "تایید رمز عبور الزامی است",
+          "match": "رمز عبور و تایید رمز عبور یکسان نیست"
+        }
+      }
+    }
+  },
+  "todos": {
+    "add": {
+      "placeholder": "یک تودو جدید اضافه کنید"
+    },
+    "edit": {
+      "deleteTodoConfirmationTitle": "آیا مطمئن هستید که می‌خواهید این تودو را حذف کنید؟",
+      "deleteTodoConfirmationDescription": "این عملیات قابل بازگشت نیست.",
+      "deleteTodoSuccess": "تودو با موفقیت حذف شد",
+      "createdAt": "ایجاد شده در {{date}}",
+      "notePlaceholder": "یادداشتی اضافه کنید"
+    },
+    "empty": "تودویی یافت نشد"
   }
 }

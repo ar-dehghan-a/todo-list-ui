@@ -1,25 +1,25 @@
-import {lazy} from 'react'
 import {ConfigProvider as AntProvider} from 'antd'
-import {ThemeProvider} from '@emotion/react'
 import {QueryClientProvider} from '@tanstack/react-query'
+import {ThemeProvider} from '@emotion/react'
 import {ErrorBoundary} from 'react-error-boundary'
 import AppRouter from './routes/AppRouter'
-import {darkThemeConfig, lightThemeConfig} from './config/theme'
 import queryClient from './config/react-query'
-import {useLanguage, useTheme} from './features/app'
-
-const ServerError = lazy(() => import('./pages/ServerError'))
+import {darkThemeConfig, lightThemeConfig} from './config/theme'
+import {useLanguage} from './hooks'
+import {ServerError, useTheme, useThemeWatcher} from '@/features/app'
 
 // Locales
 import enUS from 'antd/locale/en_US'
 import faIR from 'antd/locale/fa_IR'
 
 // Styles
-import 'antd/dist/reset.css'
+import GlobalStyles from './styles/GlobalStyles'
 
 const App = () => {
   const {isDarkMode} = useTheme()
   const {language, dir} = useLanguage()
+
+  useThemeWatcher()
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,6 +31,7 @@ const App = () => {
         }}
       >
         <ThemeProvider theme={{dir, isDarkMode}}>
+          <GlobalStyles />
           <ErrorBoundary FallbackComponent={ServerError}>
             <AppRouter />
           </ErrorBoundary>

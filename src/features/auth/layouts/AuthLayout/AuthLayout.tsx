@@ -1,14 +1,24 @@
-import {Outlet} from 'react-router-dom'
-
-import {Container, Content} from './AuthLayout.style'
+import {SwitchLanguage, SwitchThemeMode} from '@/features/app'
+import {Navigate, Outlet} from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
+import {Content, Footer, Layout} from './AuthLayout.style'
 
 const AuthLayout = () => {
+  const {isAuthenticated} = useAuth()
+
+  if (isAuthenticated) return <Navigate to="/todos" replace />
+
   return (
-    <Content>
-      <Container>
+    <Layout>
+      <Content>
         <Outlet />
-      </Container>
-    </Content>
+      </Content>
+
+      <Footer>
+        <SwitchLanguage />
+        <SwitchThemeMode />
+      </Footer>
+    </Layout>
   )
 }
 

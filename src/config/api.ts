@@ -8,13 +8,13 @@ const httpApi = axios.create({
 })
 
 const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('accessToken')
   if (token) request.headers.Authorization = `Bearer ${token}`
   return request
 }
 
 const errorInterceptor = async (axiosError: AxiosError) => {
-  if (axiosError.response?.status === HttpStatusCode.Unauthorized) localStorage.removeItem('token')
+  if (axiosError.response?.status === HttpStatusCode.Unauthorized) localStorage.removeItem('accessToken')
   return Promise.reject(axiosError)
 }
 

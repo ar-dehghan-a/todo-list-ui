@@ -1,10 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 import {themeSlice} from '@/features/app'
+import {drawerSlice} from '@/features/todos'
+import {authSlice} from '@/features/auth'
 
 export const store = configureStore({
   reducer: {
     theme: themeSlice,
+    drawer: drawerSlice,
+    auth: authSlice,
   },
 })
 

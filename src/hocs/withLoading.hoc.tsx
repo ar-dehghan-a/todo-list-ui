@@ -1,5 +1,5 @@
-import {Spin} from 'antd'
 import {Suspense} from 'react'
+import {Spin} from 'antd'
 import type {ComponentType} from 'react'
 
 const withLoading = <P extends object>(Component: ComponentType<P>) => {

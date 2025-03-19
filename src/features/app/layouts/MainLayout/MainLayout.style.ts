@@ -1,12 +1,11 @@
 import styled from '@emotion/styled'
-import {css, keyframes} from '@emotion/react'
+import {css} from '@emotion/react'
 import {Button, Layout as AntLayout} from 'antd'
-import {MoonFilled as MoonFilledIcon, SunFilled as SunFilledIcon} from '@ant-design/icons'
 
 export const Layout = styled(AntLayout)`
   width: 100%;
   height: 100vh;
-  padding: 8px;
+  padding: 8px 4px 8px 8px;
   gap: 16px;
 `
 
@@ -23,7 +22,7 @@ export const Header = styled(AntLayout.Header)`
 `
 
 export const Content = styled(AntLayout.Content)`
-  padding: 16px 50px;
+  padding-bottom: 16px;
   height: 100%;
 `
 
@@ -34,27 +33,4 @@ export const ToggleButton = styled(Button)`
   ${({theme}) => css`
     ${theme.dir === 'rtl' ? 'left: -12px;' : 'right: -12px;'}
   `}
-`
-
-const animatedFade = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(0deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(360deg);
-  }
-`
-
-export const SunFilled = styled(SunFilledIcon)`
-  font-size: 24px !important;
-  color: #f6d447;
-  animation: ${animatedFade} 0.5s ease-in-out;
-`
-
-export const MoonFilled = styled(MoonFilledIcon)`
-  font-size: 24px !important;
-  color: #001529;
-  animation: ${animatedFade} 0.5s ease-in-out;
 `
