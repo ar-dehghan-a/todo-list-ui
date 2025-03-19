@@ -11,12 +11,14 @@ import {Todos as TodosPage} from '@/features/todos'
 const NotFound = lazy(() => import('@/features/app/pages/NotFound'))
 const Important = lazy(() => import('@/features/todos/pages/Important'))
 const AuthLayout = lazy(() => import('@/features/auth/layouts/AuthLayout'))
-const Login = lazy(() => import('@/features/auth/pages/Login'))
+const SignIn = lazy(() => import('@/features/auth/pages/SignIn'))
+const SignUp = lazy(() => import('@/features/auth/pages/SignUp'))
 
 const NotFoundPage = withLoading(NotFound)
 const ImportantPage = withLoading(Important)
 const AuthLayoutPage = withLoading(AuthLayout)
-const LoginPage = withLoading(Login)
+const SignInPage = withLoading(SignIn)
+const SignUpPage = withLoading(SignUp)
 
 const AppRouter = () => {
   const protectedLayout = (
@@ -35,9 +37,10 @@ const AppRouter = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="/auth" element={<AuthLayoutPage />}>
-          <Route index element={<Navigate to="/auth/login" />} />
-          <Route path="login" element={<LoginPage />} />
+          <Route path="login" element={<SignInPage />} />
+          <Route path="register" element={<SignUpPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )

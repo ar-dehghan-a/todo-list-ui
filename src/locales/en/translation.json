@@ -30,7 +30,7 @@
       "password": "Password",
       "signIn": "Sign In",
       "forgotPassword": "Forgot Password?",
-      "signUpLink": "Don't have an account? <a>Sign up</a>",
+      "signUpLink": "Don't have an account? Sign Up",
       "validation": {
         "email": {
           "required": "Email is required",
@@ -44,6 +44,41 @@
       "success": "Sign In successful!",
       "error": {
         "incorrectCredentials": "Email or password is incorrect",
+        "serverError": "Server error. Please try again."
+      }
+    },
+    "register": {
+      "title": "Create an account",
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "signUp": "Sign Up",
+      "alreadyHaveAccount": "Already have an account? Sign In",
+      "validation": {
+        "name": {
+          "required": "Name is required"
+        },
+        "surname": {
+          "required": "Surname is required"
+        },
+        "email": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email"
+        },
+        "password": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 8 characters"
+        },
+        "confirmPassword": {
+          "required": "Confirm Password is required",
+          "match": "Passwords do not match"
+        }
+      },
+      "success": "Sign Up successful!",
+      "error": {
+        "emailExists": "Email already exists",
         "serverError": "Server error. Please try again."
       }
     }

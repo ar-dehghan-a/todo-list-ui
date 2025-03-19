@@ -3,7 +3,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import {AxiosError} from 'axios'
 import {Controller, useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {z} from 'zod'
 import useAuth from '../hooks/useAuth'
 
@@ -14,7 +14,7 @@ import {Button, Card, Form, Input, Typography, message} from 'antd'
 import {useLoginUser} from '../services/mutations'
 
 // Icons
-import {LockOutlined, UserOutlined} from '@ant-design/icons'
+import {LockOutlined, MailOutlined} from '@ant-design/icons'
 
 const {Title} = Typography
 
@@ -24,7 +24,7 @@ const Box = styled(Card)`
     `0 4px 12px ${theme.isDarkMode ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.25)'}`};
 `
 
-const Login = () => {
+const SignIn = () => {
   const {t} = useTranslation()
   const navigate = useNavigate()
   const {setToken} = useAuth()
@@ -85,7 +85,7 @@ const Login = () => {
             control={control}
             render={({field}) => (
               <Input
-                prefix={<UserOutlined />}
+                prefix={<MailOutlined />}
                 autoComplete="email"
                 placeholder={t('auth.login.email')}
                 size="large"
@@ -115,8 +115,14 @@ const Login = () => {
           {t('auth.login.signIn')}
         </Button>
       </Form>
+
+      <Link to="/auth/forgot-password" style={{display: 'block', marginTop: 10}}>
+        {t('auth.login.forgotPassword')}
+      </Link>
+
+      <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
     </Box>
   )
 }
 
-export default Login
+export default SignIn

@@ -1,7 +1,8 @@
 import authSlice from './store/authSlice'
 
 // pages
-export {default as Login} from './pages/Login'
+export {default as SignIn} from './pages/SignIn'
+export {default as SignUp} from './pages/SignUp'
 
 // layouts
 export {default as AuthLayout} from './layouts/AuthLayout'

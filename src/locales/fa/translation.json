@@ -30,7 +30,7 @@
       "password": "رمز عبور",
       "signIn": "ورود",
       "forgotPassword": "رمز عبور خود را فراموش کردید؟",
-      "signUpLink": "هنوز حساب کاربری ندارید؟ <a>ثبت نام کنید</a>",
+      "signUpLink": "هنوز حساب کاربری ندارید؟ ثبت نام کنید",
       "validation": {
         "email": {
           "required": "ایمیل الزامی است",
@@ -45,6 +45,36 @@
       "error": {
         "incorrectCredentials": "ایمیل یا رمز عبور اشتباه است",
         "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      }
+    },
+    "register": {
+      "title": "ثبت نام",
+      "name": "نام",
+      "surname": "نام خانوادگی",
+      "email": "ایمیل",
+      "password": "رمز عبور",
+      "confirmPassword": "تایید رمز عبور",
+      "signUp": "ثبت نام",
+      "alreadyHaveAccount": "قبلا حساب کاربری دارید؟ ورود",
+      "validation": {
+        "name": {
+          "required": "نام الزامی است"
+        },
+        "surname": {
+          "required": "نام خانوادگی الزامی است"
+        },
+        "email": {
+          "required": "ایمیل الزامی است",
+          "invalid": "لطفا یک ایمیل معتبر وارد کنید"
+        },
+        "password": {
+          "required": "رمز عبور الزامی است",
+          "minLength": "رمز عبور باید حداقل ۸ کاراکتر باشد"
+        },
+        "confirmPassword": {
+          "required": "تایید رمز عبور الزامی است",
+          "match": "رمز عبور و تایید رمز عبور یکسان نیست"
+        }
       }
     }
   },
