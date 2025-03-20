@@ -81,6 +81,24 @@
         "emailExists": "Email already exists",
         "serverError": "Server error. Please try again."
       }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "email": "Email",
+      "send": "Send",
+      "success": "Email sent successfully!",
+      "successDescription": "Please check your email for a link to reset your password.",
+      "backToLogin": "Back to Login",
+      "error": {
+        "failedEmail": "There was a problem sending the email. Please try again later.",
+        "serverError": "Server error. Please try again."
+      },
+      "validation": {
+        "email": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email"
+        }
+      }
     }
   },
   "todos": {

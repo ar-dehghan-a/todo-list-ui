@@ -29,7 +29,7 @@ const SignUp = () => {
   const navigate = useNavigate()
   const {setToken} = useAuth()
 
-  const loginSchema = z
+  const registerSchema = z
     .object({
       name: z.string().min(1, t('auth.register.validation.name.required')),
       surname: z.string().min(1, t('auth.register.validation.surname.required')),
@@ -48,13 +48,13 @@ const SignUp = () => {
       path: ['confirmPassword'],
     })
 
-  type LoginFormData = z.infer<typeof loginSchema>
+  type RegisterFormData = z.infer<typeof registerSchema>
 
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<LoginFormData>({
+  } = useForm<RegisterFormData>({
     defaultValues: {
       name: '',
       surname: '',
@@ -62,12 +62,12 @@ const SignUp = () => {
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   })
 
   const {mutate: registerMutation, isPending} = useRegisterUser()
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = (data: RegisterFormData) => {
     registerMutation(data, {
       onSuccess: data => {
         message.success(t('auth.register.success'))
@@ -130,7 +130,7 @@ const SignUp = () => {
               <Input
                 prefix={<MailOutlined />}
                 autoComplete="email"
-                placeholder={t('auth.login.email')}
+                placeholder={t('auth.register.email')}
                 size="large"
                 {...field}
               />
@@ -146,7 +146,7 @@ const SignUp = () => {
               <Input.Password
                 prefix={<LockOutlined />}
                 autoComplete="current-password"
-                placeholder={t('auth.login.password')}
+                placeholder={t('auth.register.password')}
                 size="large"
                 {...field}
               />
@@ -178,7 +178,7 @@ const SignUp = () => {
         </Button>
       </Form>
 
-      <Link to="/auth/login" style={{display: 'block', marginTop: 10}}>
+      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10}}>
         {t('auth.register.alreadyHaveAccount')}
       </Link>
     </Box>

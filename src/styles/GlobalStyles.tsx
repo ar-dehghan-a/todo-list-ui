@@ -19,6 +19,11 @@ const GlobalStyles = () => (
         transition: none !important;
       }
 
+      /* Increase icon margin in input fields */
+      .ant-input-affix-wrapper .ant-input-prefix {
+        margin-inline-end: 6px;
+      }
+
       @font-face {
         font-family: 'Vazir';
         src: url('../assets/fonts/Vazir-Thin-FD-WOL.woff2') format('woff2'),

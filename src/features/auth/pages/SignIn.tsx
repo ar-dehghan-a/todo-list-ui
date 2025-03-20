@@ -116,11 +116,10 @@ const SignIn = () => {
         </Button>
       </Form>
 
-      <Link to="/auth/forgot-password" style={{display: 'block', marginTop: 10}}>
-        {t('auth.login.forgotPassword')}
-      </Link>
-
-      <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start', marginTop: 10}}>
+        <Link to="/auth/forgot-password">{t('auth.login.forgotPassword')}</Link>
+        <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
+      </div>
     </Box>
   )
 }
