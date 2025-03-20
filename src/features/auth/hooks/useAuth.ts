@@ -10,13 +10,13 @@ const useAuth = () => {
   const token = useMemo(() => authState.token, [authState.token])
 
   const handleSetToken = useCallback((token: string) => dispatch(setToken(token)), [dispatch])
-  const handleClearToken = useCallback(() => dispatch(clearToken()), [dispatch])
+  const handleLogout = useCallback(() => dispatch(clearToken()), [dispatch])
 
   return {
     isAuthenticated,
     token,
     setToken: handleSetToken,
-    clearToken: handleClearToken,
+    logout: handleLogout,
   }
 }
 

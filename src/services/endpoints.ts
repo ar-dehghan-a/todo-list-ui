@@ -1,4 +1,10 @@
 const API_ENDPOINTS = {
+  AUTH: {
+    REGISTER: '/auth/register',
+    LOGIN: '/auth/login',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: (token: string) => `/auth/reset-password/${token}`,
+  },
   TODOS: {
     GET_ALL: '/todos',
     GET_BY_ID: (id: number) => `/todos/${id}`,

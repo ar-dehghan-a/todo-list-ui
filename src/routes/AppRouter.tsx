@@ -14,6 +14,7 @@ const AuthLayout = lazy(() => import('@/features/auth/layouts/AuthLayout'))
 const SignIn = lazy(() => import('@/features/auth/pages/SignIn'))
 const SignUp = lazy(() => import('@/features/auth/pages/SignUp'))
 const ForgotPassword = lazy(() => import('@/features/auth/pages/ForgotPassword'))
+const ResetPassword = lazy(() => import('@/features/auth/pages/ResetPassword'))
 
 const NotFoundPage = withLoading(NotFound)
 const ImportantPage = withLoading(Important)
@@ -21,6 +22,7 @@ const AuthLayoutPage = withLoading(AuthLayout)
 const SignInPage = withLoading(SignIn)
 const SignUpPage = withLoading(SignUp)
 const ForgotPasswordPage = withLoading(ForgotPassword)
+const ResetPasswordPage = withLoading(ResetPassword)
 
 const AppRouter = () => {
   const protectedLayout = (
@@ -42,6 +44,7 @@ const AppRouter = () => {
           <Route path="login" element={<SignInPage />} />
           <Route path="register" element={<SignUpPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="reset-password/:resetToken" element={<ResetPasswordPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
