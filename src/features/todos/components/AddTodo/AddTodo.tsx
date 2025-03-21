@@ -19,6 +19,7 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const input: HTMLInputElement | null = e.currentTarget.querySelector('input[name="todo"]')
 
     if (!title.trim()) return
 
@@ -30,6 +31,9 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
       {
         onSuccess() {
           setTitle('')
+          setTimeout(() => {
+            if (input) input.focus()
+          }, 0)
         },
       }
     )

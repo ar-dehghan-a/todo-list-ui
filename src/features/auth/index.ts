@@ -1,4 +1,4 @@
-import authSlice from './store/authSlice'
+import authSlice, {clearToken} from './store/authSlice'
 
 // pages
 export {default as SignIn} from './pages/SignIn'
@@ -12,4 +12,4 @@ export {default as AuthLayout} from './layouts/AuthLayout'
 export {default as useAuth} from './hooks/useAuth'
 
 // store
-export {authSlice}
+export {authSlice, clearToken}

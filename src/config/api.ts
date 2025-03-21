@@ -1,5 +1,7 @@
 import axios, {HttpStatusCode} from 'axios'
 import type {AxiosError, InternalAxiosRequestConfig} from 'axios'
+import {store} from '@/store'
+import {clearToken} from '@/features/auth'
 
 const httpApi = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -14,7 +16,7 @@ const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
 }
 
 const errorInterceptor = async (axiosError: AxiosError) => {
-  if (axiosError.response?.status === HttpStatusCode.Unauthorized) localStorage.removeItem('accessToken')
+  if (axiosError.response?.status === HttpStatusCode.Unauthorized) store.dispatch(clearToken())
   return Promise.reject(axiosError)
 }
 
