@@ -11,6 +11,13 @@ export const Layout = styled(AntLayout)`
 
 export const Sider = styled(AntLayout.Sider)`
   border-radius: 8px;
+  padding: 10px 0;
+
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 `
 
 export const Header = styled(AntLayout.Header)`
@@ -33,4 +40,54 @@ export const ToggleButton = styled(Button)`
   ${({theme}) => css`
     ${theme.dir === 'rtl' ? 'left: -12px;' : 'right: -12px;'}
   `}
+`
+
+export const UserInfo = styled.div<{collapsed: boolean}>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px 6px 0;
+  overflow: hidden;
+  cursor: pointer;
+
+  .user-info-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: ${({collapsed}) => (collapsed ? '0 15px' : '0 10px')};
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .user-info-name,
+    .user-info-email {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    .user-info-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ant-color-text);
+    }
+
+    .user-info-email {
+      font-size: 12px;
+      color: var(--ant-color-text-tertiary);
+    }
+  }
 `

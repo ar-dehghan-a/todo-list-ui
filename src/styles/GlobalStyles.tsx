@@ -26,7 +26,8 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: 'Vazir';
-        src: url('../assets/fonts/Vazir-Thin-FD-WOL.woff2') format('woff2'),
+        src:
+          url('../assets/fonts/Vazir-Thin-FD-WOL.woff2') format('woff2'),
           url('../assets/fonts/Vazir-Thin-FD-WOL.woff') format('woff');
         font-weight: 100;
         font-style: normal;
@@ -34,7 +35,8 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: 'Vazir';
-        src: url('../assets/fonts/Vazir-Light-FD-WOL.woff2') format('woff2'),
+        src:
+          url('../assets/fonts/Vazir-Light-FD-WOL.woff2') format('woff2'),
           url('../assets/fonts/Vazir-Light-FD-WOL.woff') format('woff');
         font-weight: 300;
         font-style: normal;
@@ -42,7 +44,8 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: 'Vazir';
-        src: url('../assets/fonts/Vazir-FD-WOL.woff2') format('woff2'),
+        src:
+          url('../assets/fonts/Vazir-FD-WOL.woff2') format('woff2'),
           url('../assets/fonts/Vazir-FD-WOL.woff') format('woff');
         font-weight: 400;
         font-style: normal;
@@ -50,7 +53,8 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: 'Vazir';
-        src: url('../assets/fonts/Vazir-Medium-FD-WOL.woff2') format('woff2'),
+        src:
+          url('../assets/fonts/Vazir-Medium-FD-WOL.woff2') format('woff2'),
           url('../assets/fonts/Vazir-Medium-FD-WOL.woff') format('woff');
         font-weight: 500;
         font-style: normal;
@@ -58,14 +62,20 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: 'Vazir';
-        src: url('../assets/fonts/Vazir-Bold-FD-WOL.woff2') format('woff2'),
+        src:
+          url('../assets/fonts/Vazir-Bold-FD-WOL.woff2') format('woff2'),
           url('../assets/fonts/Vazir-Bold-FD-WOL.woff') format('woff');
         font-weight: 700;
         font-style: normal;
       }
 
       .ant-message-notice-content {
-        font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+        font-family:
+          'Vazir',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto;
       }
     `}
   />
