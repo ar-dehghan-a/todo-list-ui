@@ -1,5 +1,7 @@
 import httpApi from '@/config/api'
 import API_ENDPOINTS from '@/services/endpoints'
+import type {ApiResponse} from '@/@types/common'
+import type {User} from '@/@types/user'
 
 interface RegisterCredentials {
   name: string
@@ -39,6 +41,8 @@ interface ResetPasswordResponse {
   token: string
 }
 
+// mutations
+
 export const register = async (credentials: RegisterCredentials) => {
   const {data} = await httpApi.post<RegisterResponse>(API_ENDPOINTS.AUTH.REGISTER, credentials)
   return data
@@ -59,5 +63,12 @@ export const resetPassword = async (token: string, credentials: ResetPasswordCre
     API_ENDPOINTS.AUTH.RESET_PASSWORD(token),
     credentials
   )
+  return data
+}
+
+// queries
+
+export const getCurrentUser = async () => {
+  const {data} = await httpApi.get<ApiResponse<User>>(API_ENDPOINTS.AUTH.CURRENT_USER)
   return data
 }
