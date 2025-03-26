@@ -15,6 +15,7 @@ const SignIn = lazy(() => import('@/features/auth/pages/SignIn'))
 const SignUp = lazy(() => import('@/features/auth/pages/SignUp'))
 const ForgotPassword = lazy(() => import('@/features/auth/pages/ForgotPassword'))
 const ResetPassword = lazy(() => import('@/features/auth/pages/ResetPassword'))
+const Logout = lazy(() => import('@/routes/Logout'))
 
 const NotFoundPage = withLoading(NotFound)
 const ImportantPage = withLoading(Important)
@@ -23,6 +24,7 @@ const SignInPage = withLoading(SignIn)
 const SignUpPage = withLoading(SignUp)
 const ForgotPasswordPage = withLoading(ForgotPassword)
 const ResetPasswordPage = withLoading(ResetPassword)
+const LogoutPage = withLoading(Logout)
 
 const AppRouter = () => {
   const protectedLayout = (
@@ -35,17 +37,19 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={protectedLayout}>
-          <Route index element={<Navigate to="/todos" />} />
+          <Route index element={<Navigate to="/todos" replace />} />
           <Route path="todos" element={<TodosPage />} />
           <Route path="important" element={<ImportantPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="/auth" element={<AuthLayoutPage />}>
+        <Route path="auth" element={<AuthLayoutPage />}>
+          <Route index element={<Navigate to="/auth/login" replace />} />
           <Route path="login" element={<SignInPage />} />
           <Route path="register" element={<SignUpPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
           <Route path="reset-password/:resetToken" element={<ResetPasswordPage />} />
         </Route>
+        <Route path="logout" element={<LogoutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

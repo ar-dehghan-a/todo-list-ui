@@ -1,16 +1,15 @@
-// import {useEffect} from 'react'
-// import {useAppDispatch} from '@app/hooks/reduxHooks'
+import {useEffect} from 'react'
 import {Navigate} from 'react-router-dom'
-// import {doLogout} from '@app/store/slices/authSlice'
+import {useAuth} from '@/features/auth'
 
 const Logout = () => {
-  // const dispatch = useAppDispatch()
+  const {logout} = useAuth()
 
-  // useEffect(() => {
-  //   dispatch(doLogout())
-  // }, [dispatch])
+  useEffect(() => {
+    logout()
+  }, [logout])
 
-  return <Navigate to="/login" replace />
+  return <Navigate to="/auth/login" replace />
 }
 
 export default Logout
