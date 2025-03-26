@@ -178,7 +178,7 @@ const SignUp = () => {
         </Button>
       </Form>
 
-      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10}}>
+      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10, fontSize: 12}}>
         {t('auth.register.alreadyHaveAccount')}
       </Link>
     </Box>

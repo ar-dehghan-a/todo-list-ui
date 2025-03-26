@@ -116,7 +116,15 @@ const SignIn = () => {
         </Button>
       </Form>
 
-      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start', marginTop: 10}}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
+          marginTop: 10,
+          fontSize: 12,
+        }}
+      >
         <Link to="/auth/forgot-password">{t('auth.login.forgotPassword')}</Link>
         <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
       </div>

@@ -90,12 +90,19 @@ const ForgotPassword = () => {
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" block size="large" loading={isPending} disabled={isSuccess}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          disabled={isSuccess}
+          loading={isPending}
+          size="large"
+          block
+        >
           {t('auth.forgotPassword.send')}
         </Button>
       </Form>
 
-      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10}}>
+      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10, fontSize: 12}}>
         {t('auth.forgotPassword.backToLogin')}
       </Link>
 
