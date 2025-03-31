@@ -143,7 +143,11 @@
       "surnameRequired": "نام خانوادگی باید حداقل ۲ کاراکتر باشد",
       "emailInvalid": "ایمیل معتبر وارد کنید",
       "updateSuccess": "پروفایل با موفقیت بروز شد",
-      "updateError": "بروز رسانی پروفایل با مشکل مواجه شد",
+      "error": {
+        "FileNotFound": "فایل یافت نشد",
+        "FileMustImage": "فایل باید یک عکس باشد",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
       "uploadPhoto": "آپلود عکس",
       "removePhoto": "حذف عکس",
       "name": "نام",

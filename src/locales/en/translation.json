@@ -143,7 +143,11 @@
       "surnameRequired": "Surname must be at least 2 characters",
       "emailInvalid": "Invalid email address",
       "updateSuccess": "Profile updated successfully",
-      "updateError": "Failed to update profile",
+      "error": {
+        "FileNotFound": "File not found",
+        "FileMustImage": "File must be an image",
+        "serverError": "Server error. Please try again."
+      },
       "uploadPhoto": "Upload a photo",
       "removePhoto": "Remove photo",
       "name": "Name",

@@ -19,6 +19,7 @@ import {EditOutlined, LoadingOutlined, UserOutlined} from '@ant-design/icons'
 
 // Types
 import type {MenuProps, UploadProps} from 'antd'
+import type {AxiosError} from 'axios'
 
 const beforeUpload = (file: FileType) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -70,8 +71,11 @@ const UserInfo = () => {
         setImageUrl(null)
         message.success(t('profile.updateUserInfo.updateSuccess'))
       },
-      onError: () => {
-        message.error(t('profile.updateUserInfo.updateError'))
+      onError: (error: unknown) => {
+        const status = (error as AxiosError).response?.status
+        if (status === 404) message.error(t('profile.updateUserInfo.error.FileNotFound'))
+        if (status === 400) message.error(t('profile.updateUserInfo.error.FileMustImage'))
+        else message.error(t('profile.updateUserInfo.error.serverError'))
       },
     })
   }
