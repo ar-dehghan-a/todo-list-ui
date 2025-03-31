@@ -43,27 +43,18 @@ export const ToggleButton = styled(Button)`
 `
 
 export const UserInfo = styled.div<{collapsed: boolean}>`
-  width: 100%;
   display: flex;
   align-items: center;
-  padding: 6px 10px 6px 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-end: 10px;
   overflow: hidden;
   cursor: pointer;
 
   .user-info-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
     margin: ${({collapsed}) => (collapsed ? '0 15px' : '0 10px')};
-    overflow: hidden;
     flex-shrink: 0;
     transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
 
   .user-info {

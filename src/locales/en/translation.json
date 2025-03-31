@@ -13,7 +13,9 @@
   },
   "sidebar": {
     "todos": "Todos",
-    "important": "Important"
+    "important": "Important",
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "notFound": {
     "title": "404",
