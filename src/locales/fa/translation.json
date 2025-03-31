@@ -5,9 +5,11 @@
   },
   "actions": {
     "create": "ایجاد",
+    "crop": "برش",
     "edit": "ویرایش",
     "delete": "حذف",
-    "cancel": "انصراف"
+    "cancel": "انصراف",
+    "remove": "حذف"
   },
   "sidebar": {
     "todos": "تودوها",
@@ -75,6 +77,11 @@
           "required": "تایید رمز عبور الزامی است",
           "match": "رمز عبور و تایید رمز عبور یکسان نیست"
         }
+      },
+      "success": "ثبت نام با موفقیت انجام شد",
+      "error": {
+        "emailExists": "ایمیل قبلا ثبت شده است",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
       }
     },
     "forgotPassword": {
@@ -128,5 +135,21 @@
       "notePlaceholder": "یادداشتی اضافه کنید"
     },
     "empty": "تودویی یافت نشد"
+  },
+  "profile": {
+    "updateUserInfo": {
+      "profileInfo": "اطلاعات پروفایل",
+      "nameRequired": "نام باید حداقل ۲ کاراکتر باشد",
+      "surnameRequired": "نام خانوادگی باید حداقل ۲ کاراکتر باشد",
+      "emailInvalid": "ایمیل معتبر وارد کنید",
+      "updateSuccess": "پروفایل با موفقیت به روز شد",
+      "updateError": "به روز رسانی پروفایل با مشکل مواجه شد",
+      "uploadPhoto": "آپلود عکس",
+      "removePhoto": "حذف عکس",
+      "name": "نام",
+      "surname": "نام خانوادگی",
+      "email": "ایمیل",
+      "update": "بروز رسانی پروفایل"
+    }
   }
 }

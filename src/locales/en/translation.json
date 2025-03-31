@@ -5,9 +5,11 @@
   },
   "actions": {
     "create": "Create",
+    "crop": "Crop",
     "edit": "Edit",
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "remove": "Remove"
   },
   "sidebar": {
     "todos": "Todos",
@@ -133,5 +135,21 @@
       "notePlaceholder": "Add a note"
     },
     "empty": "No todos found"
+  },
+  "profile": {
+    "updateUserInfo": {
+      "profileInfo": "Profile Info",
+      "nameRequired": "Name must be at least 2 characters",
+      "surnameRequired": "Surname must be at least 2 characters",
+      "emailInvalid": "Invalid email address",
+      "updateSuccess": "Profile updated successfully",
+      "updateError": "Failed to update profile",
+      "uploadPhoto": "Upload a photo",
+      "removePhoto": "Remove photo",
+      "name": "Name",
+      "surname": "Surname",
+      "email": "Email",
+      "update": "Update Profile"
+    }
   }
 }

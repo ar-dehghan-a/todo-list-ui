@@ -4,6 +4,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import ImgCrop from 'antd-img-crop'
 import {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
+import {useTranslation} from 'react-i18next'
 import {z} from 'zod'
 
 // Components
@@ -11,22 +12,13 @@ import {Avatar, Button, Card, Dropdown, Form, Input, Spin, Upload, message} from
 import {AvatarContainer, FormGrid} from './UserInfo.style'
 
 // Services
-import {useUpdateUser} from '../../services/mutations'
-import {useUploadAvatar} from '../../services/mutations'
+import {useUpdateUser, useUploadAvatar} from '../../services/mutations'
 
 // Icons
 import {EditOutlined, LoadingOutlined, UserOutlined} from '@ant-design/icons'
 
 // Types
 import type {MenuProps, UploadProps} from 'antd'
-
-const userInfoSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  surname: z.string().min(2, 'Surname must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  photo: z.string().nullable().optional(),
-})
-type UserInfoFormData = z.infer<typeof userInfoSchema>
 
 const beforeUpload = (file: FileType) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -39,11 +31,20 @@ const beforeUpload = (file: FileType) => {
 }
 
 const UserInfo = () => {
+  const {t} = useTranslation()
   const {currentUser, isLoading: isLoadingUser} = useAuth()
   const [isDeletedAvatar, setIsDeletedAvatar] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
 
   const avatar = isDeletedAvatar ? null : imageUrl || currentUser?.photo
+
+  const userInfoSchema = z.object({
+    name: z.string().min(2, t('profile.updateUserInfo.nameRequired')),
+    surname: z.string().min(2, t('profile.updateUserInfo.surnameRequired')),
+    email: z.string().email(t('profile.updateUserInfo.emailInvalid')),
+    photo: z.string().nullable().optional(),
+  })
+  type UserInfoFormData = z.infer<typeof userInfoSchema>
 
   const {
     control,
@@ -67,10 +68,10 @@ const UserInfo = () => {
       onSuccess: () => {
         setIsDeletedAvatar(false)
         setImageUrl(null)
-        message.success('Profile updated successfully')
+        message.success(t('profile.updateUserInfo.updateSuccess'))
       },
       onError: () => {
-        message.error('Failed to update profile')
+        message.error(t('profile.updateUserInfo.updateError'))
       },
     })
   }
@@ -88,7 +89,13 @@ const UserInfo = () => {
     {
       key: '1',
       label: (
-        <ImgCrop aspect={1 / 1} cropShape="round" showGrid modalOk="Crop" modalCancel="Cancel">
+        <ImgCrop
+          aspect={1 / 1}
+          cropShape="round"
+          showGrid
+          modalOk={t('actions.crop')}
+          modalCancel={t('actions.cancel')}
+        >
           <Upload
             listType="text"
             customRequest={async ({file, onSuccess, onError}) => {
@@ -105,14 +112,14 @@ const UserInfo = () => {
             onChange={onChange}
             accept="image/jpeg, image/png"
           >
-            Upload a photo
+            {t('profile.updateUserInfo.uploadPhoto')}
           </Upload>
         </ImgCrop>
       ),
     },
     {
       key: '2',
-      label: 'Remove photo',
+      label: t('profile.updateUserInfo.removePhoto'),
       onClick: () => {
         setValue('photo', null)
         setIsDeletedAvatar(true)
@@ -121,7 +128,7 @@ const UserInfo = () => {
   ]
 
   return (
-    <Card title="Profile Info" loading={isLoadingUser}>
+    <Card title={t('profile.updateUserInfo.profileInfo')} loading={isLoadingUser}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AvatarContainer>
           <Spin spinning={isUploadingAvatar} indicator={<LoadingOutlined spin />} size="large">
@@ -130,51 +137,57 @@ const UserInfo = () => {
 
           <Dropdown menu={{items}} placement="bottom" trigger={['click']}>
             <Button className="edit-button" icon={<EditOutlined />}>
-              Edit
+              {t('actions.edit')}
             </Button>
           </Dropdown>
         </AvatarContainer>
 
         <FormGrid>
           <Form.Item
-            label="Name"
+            label={t('profile.updateUserInfo.name')}
             help={errors.name?.message}
             validateStatus={errors.name ? 'error' : ''}
           >
             <Controller
               name="name"
               control={control}
-              render={({field}) => <Input {...field} placeholder="Name" />}
+              render={({field}) => (
+                <Input {...field} placeholder={t('profile.updateUserInfo.name')} />
+              )}
             />
           </Form.Item>
 
           <Form.Item
-            label="Surname"
+            label={t('profile.updateUserInfo.surname')}
             help={errors.surname?.message}
             validateStatus={errors.surname ? 'error' : ''}
           >
             <Controller
               name="surname"
               control={control}
-              render={({field}) => <Input {...field} placeholder="Surname" />}
+              render={({field}) => (
+                <Input {...field} placeholder={t('profile.updateUserInfo.surname')} />
+              )}
             />
           </Form.Item>
         </FormGrid>
 
         <Form.Item
-          label="Email"
+          label={t('profile.updateUserInfo.email')}
           help={errors.email?.message}
           validateStatus={errors.email ? 'error' : ''}
         >
           <Controller
             name="email"
             control={control}
-            render={({field}) => <Input {...field} type="email" placeholder="Email" />}
+            render={({field}) => (
+              <Input {...field} type="email" placeholder={t('profile.updateUserInfo.email')} />
+            )}
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" loading={isUpdatingUser} block>
-          Update Profile
+        <Button type="primary" htmlType="submit" loading={isUpdatingUser}>
+          {t('profile.updateUserInfo.update')}
         </Button>
       </form>
     </Card>
