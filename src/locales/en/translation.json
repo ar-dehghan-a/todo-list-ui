@@ -176,6 +176,18 @@
         "serverError": "Server error. Please try again."
       },
       "success": "Password updated successfully"
+    },
+    "deleteUser": {
+      "title": "Delete Account",
+      "description": "Once you delete your account, there is no going back. Please be certain.",
+      "confirmTitle": "Are you sure you want to delete your account?",
+      "confirmContent": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+      "deleteButton": "Delete Account",
+      "error": {
+        "userNotFound": "User not found",
+        "serverError": "Server error. Please try again."
+      },
+      "success": "Account deleted successfully"
     }
   }
 }

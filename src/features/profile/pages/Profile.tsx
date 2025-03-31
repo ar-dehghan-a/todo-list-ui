@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import UserInfo from '../components/UserInfo'
 import UserPassword from '../components/UserPassword'
+import UserDelete from '../components/UserDelete'
 
 const Container = styled.div`
   height: 100%;
@@ -33,6 +34,7 @@ const Profile = () => {
     <Container>
       <UserInfo />
       <UserPassword />
+      <UserDelete />
     </Container>
   )
 }

@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query'
-import {updateUser, uploadAvatar, updateUserPassword} from './api'
+import {updateUser, uploadAvatar, updateUserPassword, deleteUser} from './api'
 import QUERY_KEYS from '@/services/queryKeys'
 
 export const useUploadAvatar = () => {
@@ -22,5 +22,16 @@ export const useUpdateUser = () => {
 export const useUpdateUserPassword = () => {
   return useMutation({
     mutationFn: updateUserPassword,
+  })
+}
+
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      queryClient.clear()
+    },
   })
 }

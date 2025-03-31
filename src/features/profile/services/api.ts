@@ -46,3 +46,8 @@ export const updateUserPassword = async (passwords: UpdateUserPasswordRequest) =
   )
   return data
 }
+
+export const deleteUser = async () => {
+  const {data} = await httpApi.delete<ApiResponse<null>>(API_ENDPOINTS.USERS.DELETE)
+  return data
+}

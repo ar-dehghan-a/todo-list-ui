@@ -33,7 +33,9 @@ const ResetPassword = () => {
   const resetPasswordSchema = z
     .object({
       newPassword: z.string().min(1, t('auth.resetPassword.validation.newPassword.minLength')),
-      confirmPassword: z.string().min(1, t('auth.resetPassword.validation.confirmPassword.required')),
+      confirmPassword: z
+        .string()
+        .min(1, t('auth.resetPassword.validation.confirmPassword.required')),
     })
     .refine(data => data.newPassword === data.confirmPassword, {
       message: t('auth.resetPassword.validation.confirmPassword.match'),
@@ -79,7 +81,10 @@ const ResetPassword = () => {
       </Title>
 
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item validateStatus={errors.newPassword ? 'error' : ''} help={errors.newPassword?.message}>
+        <Form.Item
+          validateStatus={errors.newPassword ? 'error' : ''}
+          help={errors.newPassword?.message}
+        >
           <Controller
             name="newPassword"
             control={control}
@@ -105,7 +110,7 @@ const ResetPassword = () => {
             render={({field}) => (
               <Input.Password
                 prefix={<LockOutlined />}
-                autoComplete="confirm-password"
+                autoComplete="new-password"
                 placeholder={t('auth.resetPassword.confirmPassword')}
                 size="large"
                 {...field}
