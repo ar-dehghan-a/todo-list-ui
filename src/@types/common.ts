@@ -5,3 +5,13 @@ export interface ApiResponse<T> {
   data: T
   message?: string
 }
+
+export interface UploadResponse {
+  status: 'success' | 'error'
+  data: {
+    id: string
+    filename: string
+    mimeType: string
+    url: string
+  }
+}

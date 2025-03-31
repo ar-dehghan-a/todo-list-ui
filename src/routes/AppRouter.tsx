@@ -10,6 +10,7 @@ import {MainLayout} from '@/features/app'
 import {Todos as TodosPage} from '@/features/todos'
 const NotFound = lazy(() => import('@/features/app/pages/NotFound'))
 const Important = lazy(() => import('@/features/todos/pages/Important'))
+const Profile = lazy(() => import('@/features/profile/pages/Profile'))
 const AuthLayout = lazy(() => import('@/features/auth/layouts/AuthLayout'))
 const SignIn = lazy(() => import('@/features/auth/pages/SignIn'))
 const SignUp = lazy(() => import('@/features/auth/pages/SignUp'))
@@ -19,6 +20,7 @@ const Logout = lazy(() => import('@/routes/Logout'))
 
 const NotFoundPage = withLoading(NotFound)
 const ImportantPage = withLoading(Important)
+const ProfilePage = withLoading(Profile)
 const AuthLayoutPage = withLoading(AuthLayout)
 const SignInPage = withLoading(SignIn)
 const SignUpPage = withLoading(SignUp)
@@ -40,6 +42,7 @@ const AppRouter = () => {
           <Route index element={<Navigate to="/todos" replace />} />
           <Route path="todos" element={<TodosPage />} />
           <Route path="important" element={<ImportantPage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
         <Route path="auth" element={<AuthLayoutPage />}>
