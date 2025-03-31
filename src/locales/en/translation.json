@@ -138,11 +138,13 @@
   },
   "profile": {
     "updateUserInfo": {
-      "profileInfo": "Profile Info",
-      "nameRequired": "Name must be at least 2 characters",
-      "surnameRequired": "Surname must be at least 2 characters",
-      "emailInvalid": "Invalid email address",
+      "title": "Profile Info",
       "updateSuccess": "Profile updated successfully",
+      "validation": {
+        "nameRequired": "Name must be at least 2 characters",
+        "surnameRequired": "Surname must be at least 2 characters",
+        "emailInvalid": "Invalid email address"
+      },
       "error": {
         "FileNotFound": "File not found",
         "FileMustImage": "File must be an image",
@@ -154,6 +156,24 @@
       "surname": "Surname",
       "email": "Email",
       "update": "Update Profile"
+    },
+    "updateUserPassword": {
+      "title": "Update Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "update": "Update Password",
+      "validation": {
+        "currentPasswordRequired": "Current password is required",
+        "newPasswordRequired": "New password is required",
+        "confirmPasswordRequired": "Confirm password is required",
+        "passwordsDoNotMatch": "Passwords don't match"
+      },
+      "error": {
+        "incorrectPassword": "Current password is incorrect",
+        "serverError": "Server error. Please try again."
+      },
+      "success": "Password updated successfully"
     }
   }
 }

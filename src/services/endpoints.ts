@@ -19,6 +19,7 @@ const API_ENDPOINTS = {
     GET_ALL: '/users',
     UPDATE: '/users/me',
     DELETE: '/users/me',
+    UPDATE_PASSWORD: '/auth/update-password',
   },
   UPLOAD: {
     UPLOAD_FILE: '/files/upload',

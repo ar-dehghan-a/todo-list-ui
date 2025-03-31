@@ -12,6 +12,17 @@ interface UpdateUserRequest {
   photo: string | null
 }
 
+interface UpdateUserPasswordRequest {
+  currentPassword: string
+  newPassword: string
+  confirmPassword: string
+}
+
+interface UpdateUserPasswordResponse {
+  message: string
+  token: string
+}
+
 export const uploadAvatar = async (file: File) => {
   const formData = new FormData()
   formData.append('file', file)
@@ -25,5 +36,13 @@ export const uploadAvatar = async (file: File) => {
 
 export const updateUser = async (user: Partial<UpdateUserRequest>) => {
   const {data} = await httpApi.patch<ApiResponse<User>>(API_ENDPOINTS.USERS.UPDATE, user)
+  return data
+}
+
+export const updateUserPassword = async (passwords: UpdateUserPasswordRequest) => {
+  const {data} = await httpApi.patch<UpdateUserPasswordResponse>(
+    API_ENDPOINTS.USERS.UPDATE_PASSWORD,
+    passwords
+  )
   return data
 }

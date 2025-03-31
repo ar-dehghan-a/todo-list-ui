@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from '@tanstack/react-query'
-import {updateUser, uploadAvatar} from './api'
+import {updateUser, uploadAvatar, updateUserPassword} from './api'
 import QUERY_KEYS from '@/services/queryKeys'
 
 export const useUploadAvatar = () => {
@@ -16,5 +16,11 @@ export const useUpdateUser = () => {
     onSuccess: data => {
       queryClient.setQueryData([QUERY_KEYS.CURRENT_USER], data)
     },
+  })
+}
+
+export const useUpdateUserPassword = () => {
+  return useMutation({
+    mutationFn: updateUserPassword,
   })
 }

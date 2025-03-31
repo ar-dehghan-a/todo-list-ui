@@ -16,7 +16,11 @@ const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
 }
 
 const errorInterceptor = async (axiosError: AxiosError) => {
-  if (axiosError.response?.status === HttpStatusCode.Unauthorized) store.dispatch(clearToken())
+  if (
+    axiosError.response?.status === HttpStatusCode.Unauthorized &&
+    !axiosError.config?.url?.includes('/update-password')
+  )
+    store.dispatch(clearToken())
   return Promise.reject(axiosError)
 }
 

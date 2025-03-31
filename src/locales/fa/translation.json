@@ -138,11 +138,13 @@
   },
   "profile": {
     "updateUserInfo": {
-      "profileInfo": "اطلاعات پروفایل",
-      "nameRequired": "نام باید حداقل ۲ کاراکتر باشد",
-      "surnameRequired": "نام خانوادگی باید حداقل ۲ کاراکتر باشد",
-      "emailInvalid": "ایمیل معتبر وارد کنید",
+      "title": "اطلاعات پروفایل",
       "updateSuccess": "پروفایل با موفقیت بروز شد",
+      "validation": {
+        "nameRequired": "نام باید حداقل ۲ کاراکتر باشد",
+        "surnameRequired": "نام خانوادگی باید حداقل ۲ کاراکتر باشد",
+        "emailInvalid": "ایمیل معتبر وارد کنید"
+      },
       "error": {
         "FileNotFound": "فایل یافت نشد",
         "FileMustImage": "فایل باید یک عکس باشد",
@@ -154,6 +156,24 @@
       "surname": "نام خانوادگی",
       "email": "ایمیل",
       "update": "بروز رسانی پروفایل"
+    },
+    "updateUserPassword": {
+      "title": "بروز رسانی رمز عبور",
+      "currentPassword": "رمز عبور فعلی",
+      "newPassword": "رمز عبور جدید",
+      "confirmPassword": "تایید رمز عبور",
+      "update": "بروز رسانی رمز عبور",
+      "validation": {
+        "currentPasswordRequired": "رمز عبور فعلی الزامی است",
+        "newPasswordRequired": "رمز عبور جدید الزامی است",
+        "confirmPasswordRequired": "تایید رمز عبور الزامی است",
+        "passwordsDoNotMatch": "رمز عبور و تایید رمز عبور یکسان نیست"
+      },
+      "error": {
+        "incorrectPassword": "رمز عبور فعلی اشتباه است",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
+      "success": "رمز عبور با موفقیت بروز شد"
     }
   }
 }

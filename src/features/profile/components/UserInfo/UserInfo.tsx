@@ -40,9 +40,9 @@ const UserInfo = () => {
   const avatar = isDeletedAvatar ? null : imageUrl || currentUser?.photo
 
   const userInfoSchema = z.object({
-    name: z.string().min(2, t('profile.updateUserInfo.nameRequired')),
-    surname: z.string().min(2, t('profile.updateUserInfo.surnameRequired')),
-    email: z.string().email(t('profile.updateUserInfo.emailInvalid')),
+    name: z.string().min(2, t('profile.updateUserInfo.validation.nameRequired')),
+    surname: z.string().min(2, t('profile.updateUserInfo.validation.surnameRequired')),
+    email: z.string().email(t('profile.updateUserInfo.validation.emailInvalid')),
     photo: z.string().nullable().optional(),
   })
   type UserInfoFormData = z.infer<typeof userInfoSchema>
@@ -132,7 +132,7 @@ const UserInfo = () => {
   ]
 
   return (
-    <Card title={t('profile.updateUserInfo.profileInfo')} loading={isLoadingUser}>
+    <Card title={t('profile.updateUserInfo.title')} loading={isLoadingUser}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AvatarContainer>
           <Spin spinning={isUploadingAvatar} indicator={<LoadingOutlined spin />} size="large">
