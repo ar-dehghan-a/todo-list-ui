@@ -50,7 +50,7 @@ const UserInfo = () => {
     control,
     handleSubmit,
     setValue,
-    formState: {errors},
+    formState: {errors, isDirty},
   } = useForm<UserInfoFormData>({
     resolver: zodResolver(userInfoSchema),
     values: {
@@ -186,7 +186,12 @@ const UserInfo = () => {
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" loading={isUpdatingUser}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isUpdatingUser}
+          disabled={!isDirty && !isDeletedAvatar && !imageUrl}
+        >
           {t('profile.updateUserInfo.update')}
         </Button>
       </form>
