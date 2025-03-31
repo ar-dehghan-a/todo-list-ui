@@ -1,6 +1,6 @@
 const API_ENDPOINTS = {
   AUTH: {
-    CURRENT_USER: '/user/me',
+    CURRENT_USER: '/users/me',
     REGISTER: '/auth/register',
     LOGIN: '/auth/login',
     FORGOT_PASSWORD: '/auth/forgot-password',
@@ -14,6 +14,14 @@ const API_ENDPOINTS = {
     DELETE: (id: number) => `/todos/${id}`,
     TOGGLE_COMPLETED: (id: number) => `/todos/${id}/completed`,
     TOGGLE_IMPORTANT: (id: number) => `/todos/${id}/important`,
+  },
+  USERS: {
+    GET_ALL: '/users',
+    UPDATE: '/users/me',
+    DELETE: '/users/me',
+  },
+  UPLOAD: {
+    UPLOAD_FILE: '/files/upload',
   },
 }
 

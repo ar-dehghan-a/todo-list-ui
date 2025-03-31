@@ -11,7 +11,8 @@ import {Avatar, Button, Card, Dropdown, Form, Input, Spin, Upload, message} from
 import {AvatarContainer, FormGrid} from './UserInfo.style'
 
 // Services
-import {uploadAvatar} from '../../services/api'
+import {useUpdateUser} from '../../services/mutations'
+import {useUploadAvatar} from '../../services/mutations'
 
 // Icons
 import {EditOutlined, LoadingOutlined, UserOutlined} from '@ant-design/icons'
@@ -39,7 +40,6 @@ const beforeUpload = (file: FileType) => {
 
 const UserInfo = () => {
   const {currentUser, isLoading: isLoadingUser} = useAuth()
-  const [loading, setLoading] = useState(false)
   const [isDeletedAvatar, setIsDeletedAvatar] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
 
@@ -59,24 +59,25 @@ const UserInfo = () => {
     },
   })
 
+  const {mutateAsync: uploadAvatar, isPending: isUploadingAvatar} = useUploadAvatar()
+  const {mutate: updateUser, isPending: isUpdatingUser} = useUpdateUser()
+
   const onSubmit = async (data: UserInfoFormData) => {
-    try {
-      // TODO: Implement profile update
-      console.log(data)
-      message.success('Profile updated successfully')
-    } catch (error) {
-      message.error('Failed to update profile')
-    }
+    updateUser(data, {
+      onSuccess: () => {
+        setIsDeletedAvatar(false)
+        setImageUrl(null)
+        message.success('Profile updated successfully')
+      },
+      onError: () => {
+        message.error('Failed to update profile')
+      },
+    })
   }
 
   const onChange: UploadProps['onChange'] = async info => {
-    if (info.file.status === 'uploading') {
-      setLoading(true)
-      return
-    }
     if (info.file.status === 'done') {
       convertFileToBase64(info.file.originFileObj as FileType, url => {
-        setLoading(false)
         setIsDeletedAvatar(false)
         setImageUrl(url)
       })
@@ -87,7 +88,7 @@ const UserInfo = () => {
     {
       key: '1',
       label: (
-        <ImgCrop aspect={1 / 1} cropShape="round">
+        <ImgCrop aspect={1 / 1} cropShape="round" showGrid modalOk="Crop" modalCancel="Cancel">
           <Upload
             listType="text"
             customRequest={async ({file, onSuccess, onError}) => {
@@ -123,7 +124,7 @@ const UserInfo = () => {
     <Card title="Profile Info" loading={isLoadingUser}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AvatarContainer>
-          <Spin spinning={loading} indicator={<LoadingOutlined spin />} size="large">
+          <Spin spinning={isUploadingAvatar} indicator={<LoadingOutlined spin />} size="large">
             <Avatar size={160} icon={<UserOutlined />} src={avatar} alt="avatar" />
           </Spin>
 
@@ -172,7 +173,7 @@ const UserInfo = () => {
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" block>
+        <Button type="primary" htmlType="submit" loading={isUpdatingUser} block>
           Update Profile
         </Button>
       </form>
