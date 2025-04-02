@@ -2,9 +2,6 @@ import {useMutation, useQueryClient} from '@tanstack/react-query'
 import QUERY_KEYS from '@/services/queryKeys'
 import {createTodo, updateTodo, deleteTodo, toggleCompletedTodo, toggleImportantTodo} from './api'
 
-// Types
-import type {Todo} from '@/@types/todo'
-
 export const useCreateTodo = () => {
   const queryClient = useQueryClient()
 
@@ -21,12 +18,7 @@ export const useUpdateTodo = (id: number) => {
     mutationFn: (updates: Partial<{title: string; note: string}>) => updateTodo(id, updates),
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, id], result)
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
-        return {
-          ...oldData,
-          data: oldData.data.map(todo => (todo.id === result.data.id ? result.data : todo)),
-        }
-      })
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
     },
   })
 }
@@ -36,9 +28,7 @@ export const useDeleteTodo = () => {
 
   return useMutation({
     mutationFn: deleteTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
-    },
+    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]}),
   })
 }
 
@@ -49,12 +39,7 @@ export const useToggleCompletedTodo = () => {
     mutationFn: toggleCompletedTodo,
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
-        return {
-          ...oldData,
-          data: oldData.data.map(todo => (todo.id === result.data.id ? result.data : todo)),
-        }
-      })
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
     },
   })
 }
@@ -66,12 +51,7 @@ export const useToggleImportantTodo = () => {
     mutationFn: toggleImportantTodo,
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
-      queryClient.setQueriesData({queryKey: [QUERY_KEYS.TODOS]}, (oldData: {data: Todo[]}) => {
-        return {
-          ...oldData,
-          data: oldData.data.map(todo => (todo.id === result.data.id ? result.data : todo)),
-        }
-      })
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
     },
   })
 }

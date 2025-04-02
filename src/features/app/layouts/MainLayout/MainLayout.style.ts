@@ -47,12 +47,12 @@ export const UserInfo = styled.div<{collapsed: boolean}>`
   align-items: center;
   padding-top: 6px;
   padding-bottom: 6px;
-  padding-inline-end: 10px;
+  margin: 0 10px;
   overflow: hidden;
   cursor: pointer;
 
   .user-info-avatar {
-    margin: ${({collapsed}) => (collapsed ? '0 15px' : '0 10px')};
+    margin-inline: ${({collapsed}) => (collapsed ? '5px 15px' : '0 10px')};
     flex-shrink: 0;
     transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
   }

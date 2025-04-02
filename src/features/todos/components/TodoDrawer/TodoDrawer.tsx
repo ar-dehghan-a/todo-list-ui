@@ -66,14 +66,16 @@ const TodoDrawer = () => {
     else if (note !== todo?.note) updateTodo({note})
   }
 
-  const handleDelete = () =>
-    deleteTodo(selectedTodoId || 0, {
+  const handleDelete = () => {
+    if (!selectedTodoId) return
+    deleteTodo(selectedTodoId, {
       onSuccess: () => {
         handleCancelConfirm()
         handleCloseDrawer()
         message.success(t('todos.edit.deleteTodoSuccess'))
       },
     })
+  }
 
   useEffect(() => {
     setTitle(todo?.title || '')
@@ -138,11 +140,11 @@ const TodoDrawer = () => {
       footer={renderFooter()}
     >
       <div>
-        <TitleWrapper>
+        <TitleWrapper isCompleted={todo?.isCompleted || false}>
           <Button
             type="text"
             style={{flexShrink: 0}}
-            onClick={() => toggleCompletedTodo(selectedTodoId || 0)}
+            onClick={() => selectedTodoId && toggleCompletedTodo(selectedTodoId)}
             icon={
               todo?.isCompleted ? (
                 <CheckCircleFilled style={{fontSize: '20px', color: 'var(--ant-color-primary)'}} />
@@ -174,7 +176,7 @@ const TodoDrawer = () => {
           <Button
             type="text"
             style={{flexShrink: 0}}
-            onClick={() => toggleImportantTodo(selectedTodoId || 0)}
+            onClick={() => selectedTodoId && toggleImportantTodo(selectedTodoId)}
             icon={
               todo?.isImportant ? (
                 <StarFilled style={{color: 'var(--ant-color-link)', fontSize: '20px'}} />

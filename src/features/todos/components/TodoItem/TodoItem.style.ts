@@ -16,9 +16,10 @@ export const Container = styled.div`
   }
 `
 
-export const Title = styled.p`
+export const Title = styled.p<{isCompleted: boolean}>`
   margin-bottom: 0;
   margin-inline-start: 8px;
+  text-decoration: ${({isCompleted}) => (isCompleted ? 'line-through' : 'none')};
 `
 
 export const StarButton = styled(Button)`

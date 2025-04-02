@@ -97,7 +97,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input
                 prefix={<UserOutlined />}
-                autoComplete="name"
+                autoComplete="given-name"
                 placeholder={t('auth.register.name')}
                 size="large"
                 {...field}
@@ -113,7 +113,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input
                 prefix={<UserOutlined />}
-                autoComplete="surname"
+                autoComplete="family-name"
                 placeholder={t('auth.register.surname')}
                 size="large"
                 {...field}
@@ -145,7 +145,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input.Password
                 prefix={<LockOutlined />}
-                autoComplete="current-password"
+                autoComplete="new-password"
                 placeholder={t('auth.register.password')}
                 size="large"
                 {...field}
@@ -164,7 +164,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input.Password
                 prefix={<LockOutlined />}
-                autoComplete="current-password"
+                autoComplete="new-password"
                 placeholder={t('auth.register.confirmPassword')}
                 size="large"
                 {...field}

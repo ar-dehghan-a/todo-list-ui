@@ -35,8 +35,13 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
 
   return (
     <Container onClick={handleContainerClick}>
-      <Checkbox checked={isCompleted} onClick={e => e.stopPropagation()} onChange={handleCheckboxChange} />
-      <Title>{title}</Title>
+      <Checkbox
+        checked={isCompleted}
+        onClick={e => e.stopPropagation()}
+        onChange={handleCheckboxChange}
+      />
+
+      <Title isCompleted={isCompleted}>{title}</Title>
 
       <StarButton type="link" onClick={handleStarButtonClick}>
         {isImportant ? <StarFilled /> : <StarOutlined />}

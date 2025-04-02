@@ -20,7 +20,6 @@ const drawerSlice = createSlice({
     },
     closeDrawer(state) {
       state.isOpen = false
-      state.selectedTodoId = null
     },
   },
 })

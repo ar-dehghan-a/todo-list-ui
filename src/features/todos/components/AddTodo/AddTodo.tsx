@@ -47,7 +47,7 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
         <input
           disabled={isPending}
           name="todo"
-          autoComplete="false"
+          autoComplete="off"
           placeholder={t('todos.add.placeholder')}
           value={title}
           onChange={e => setTitle(e.target.value)}
