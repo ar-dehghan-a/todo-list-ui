@@ -126,6 +126,14 @@
     }
   },
   "todos": {
+    "markAsImportant": "مهم کن",
+    "markAsNotImportant": "مهم نکن",
+    "markAsCompleted": "انجام شده کن",
+    "markAsNotCompleted": "انجام نشده کن",
+    "deleteTodo": "حذف تودو",
+    "deleteTodoConfirmationDescription": "\"{{title}}\" به طور دائم حذف خواهد شد.",
+    "deleteTodoSuccess": "تودو با موفقیت حذف شد",
+    "deleteTodoError": "خطای سرور. لطفا دوباره امتحان کنید",
     "add": {
       "placeholder": "یک تودو جدید اضافه کنید"
     },

@@ -4,16 +4,19 @@ import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Outlet, useNavigate} from 'react-router-dom'
 
-// components
+// Components
 import {TodoDrawer} from '@/features/todos'
-import {Layout as AntLayout, Avatar, Dropdown, MenuProps} from 'antd'
+import {Layout as AntLayout, Avatar, Dropdown} from 'antd'
 import SidebarMenu from '../../components/SidebarMenu'
 import SwitchLanguage from '../../components/SwitchLanguage'
 import SwitchThemeMode from '../../components/SwitchThemeMode'
 import {Content, Header, Layout, Sider, ToggleButton, UserInfo} from './MainLayout.style'
 
-// icons
+// Icons
 import {LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from '@ant-design/icons'
+
+// Types
+import type {MenuProps} from 'antd'
 
 const MainLayout = () => {
   const {t} = useTranslation()

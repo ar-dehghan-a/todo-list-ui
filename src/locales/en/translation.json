@@ -126,6 +126,14 @@
     }
   },
   "todos": {
+    "markAsImportant": "Mark as important",
+    "markAsNotImportant": "Mark as not important",
+    "markAsCompleted": "Mark as completed",
+    "markAsNotCompleted": "Mark as not completed",
+    "deleteTodo": "Delete todo",
+    "deleteTodoConfirmationDescription": "\"{{title}}\" will be deleted permanently.",
+    "deleteTodoSuccess": "Todo deleted successfully",
+    "deleteTodoError": "Failed to delete todo",
     "add": {
       "placeholder": "Add a new todo..."
     },
