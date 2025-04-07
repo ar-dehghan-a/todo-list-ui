@@ -126,6 +126,7 @@
     }
   },
   "todos": {
+    "Completed": "تکمیل شده {{count}}",
     "markAsImportant": "مهم کن",
     "markAsNotImportant": "مهم نکن",
     "markAsCompleted": "انجام شده کن",

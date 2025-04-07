@@ -5,7 +5,7 @@ import {Button, Layout as AntLayout} from 'antd'
 export const Layout = styled(AntLayout)`
   width: 100%;
   height: 100vh;
-  padding: 8px 4px 8px 8px;
+  padding: ${({theme}) => (theme.dir === 'ltr' ? '8px 4px 8px 8px' : '8px 8px 8px 4px')};
   gap: 16px;
 `
 

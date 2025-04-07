@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useTranslation} from 'react-i18next'
 
 // Components
@@ -13,13 +13,16 @@ import {PlusOutlined} from '@ant-design/icons'
 
 const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => {
   const {t} = useTranslation()
-  const [title, setTitle] = useState('')
 
   const {mutate: createTodo, isPending} = useCreateTodo()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const input: HTMLInputElement | null = e.currentTarget.querySelector('input[name="todo"]')
+
+    if (!input) return
+
+    const title = input.value
 
     if (!title.trim()) return
 
@@ -30,7 +33,7 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
       },
       {
         onSuccess() {
-          setTitle('')
+          input.value = ''
           setTimeout(() => {
             if (input) input.focus()
           }, 0)
@@ -49,8 +52,6 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
           name="todo"
           autoComplete="off"
           placeholder={t('todos.add.placeholder')}
-          value={title}
-          onChange={e => setTitle(e.target.value)}
         />
       </Form>
     </Container>

@@ -126,6 +126,7 @@
     }
   },
   "todos": {
+    "Completed": "Completed {{count}}",
     "markAsImportant": "Mark as important",
     "markAsNotImportant": "Mark as not important",
     "markAsCompleted": "Mark as completed",
