@@ -1,10 +1,11 @@
+import {useGlobalMessage} from '@/hooks'
 import {useAppDispatch} from '@/store'
 import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {openDrawer} from '../../store/drawerSlice'
 
 // Components
-import {Button, Checkbox, Dropdown, Flex, message, Modal, Typography} from 'antd'
+import {Button, Checkbox, Dropdown, Flex, Modal, Typography} from 'antd'
 import {Container, StarButton, Title} from './TodoItem.style'
 
 // Services
@@ -21,6 +22,7 @@ import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-
 // Types
 import type {Todo} from '@/@types/todo'
 import type {MenuProps} from 'antd'
+import type {AxiosError} from 'axios'
 
 interface TodoItemProps {
   todo: Todo
@@ -28,6 +30,7 @@ interface TodoItemProps {
 
 const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const dispatch = useAppDispatch()
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -47,15 +50,17 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
   const handleCancel = () => setIsDeleting(false)
 
   const handleDelete = () => {
-    setIsDeleting(false)
     deleteTodo(id, {
       onSuccess: () => {
         message.success(t('todos.deleteTodoSuccess'))
       },
-      onError: () => {
-        message.error(t('todos.deleteTodoError'))
+      onError: (error: unknown) => {
+        const status = (error as AxiosError).response?.status
+        if (status === 404) message.error(t('todos.deleteTodoNotFound'))
+        else message.error(t('todos.deleteTodoError'))
       },
     })
+    setIsDeleting(false)
   }
 
   const items: MenuProps['items'] = [

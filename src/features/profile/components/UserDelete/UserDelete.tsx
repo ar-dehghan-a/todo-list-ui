@@ -1,12 +1,20 @@
-import {Button, Card, Modal, message} from 'antd'
-import type {AxiosError} from 'axios'
+import {useGlobalMessage} from '@/hooks'
 import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useNavigate} from 'react-router-dom'
+
+// Components
+import {Button, Card, Modal} from 'antd'
+
+// Services
 import {useDeleteUser} from '../../services/mutations'
+
+// Types
+import type {AxiosError} from 'axios'
 
 const UserDelete = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const {mutate: deleteUser, isPending} = useDeleteUser()

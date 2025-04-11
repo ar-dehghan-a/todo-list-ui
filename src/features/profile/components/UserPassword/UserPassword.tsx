@@ -1,9 +1,12 @@
 import {useAuth} from '@/features/auth'
+import {useGlobalMessage} from '@/hooks'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {Button, Card, Form, Input, message} from 'antd'
 import {Controller, useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
 import {z} from 'zod'
+
+// Components
+import {Button, Card, Form, Input} from 'antd'
 
 // Services
 import {useUpdateUserPassword} from '../../services/mutations'
@@ -13,6 +16,7 @@ import type {AxiosError} from 'axios'
 
 const UserPassword = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const {setToken} = useAuth()
 
   const userPasswordSchema = z

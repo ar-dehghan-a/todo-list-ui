@@ -135,6 +135,7 @@
     "deleteTodoConfirmationDescription": "\"{{title}}\" به طور دائم حذف خواهد شد.",
     "deleteTodoSuccess": "تودو با موفقیت حذف شد",
     "deleteTodoError": "خطای سرور. لطفا دوباره امتحان کنید",
+    "deleteTodoNotFound": "تودو پیدا نشد",
     "add": {
       "placeholder": "یک تودو جدید اضافه کنید"
     },

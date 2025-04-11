@@ -1,13 +1,14 @@
+import {useGlobalMessage} from '@/hooks'
 import styled from '@emotion/styled'
-import {AxiosError} from 'axios'
-import {Link} from 'react-router-dom'
 import {zodResolver} from '@hookform/resolvers/zod'
+import {AxiosError} from 'axios'
 import {Controller, useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'
+import {Link} from 'react-router-dom'
 import {z} from 'zod'
 
 // Components
-import {Button, Card, Form, Input, Typography, message, notification as AntNotification} from 'antd'
+import {notification, Button, Card, Form, Input, Typography} from 'antd'
 
 // Services
 import {useForgotPassword} from '../services/mutations'
@@ -25,7 +26,8 @@ const Box = styled(Card)`
 
 const ForgotPassword = () => {
   const {t} = useTranslation()
-  const [notification, contextHolder] = AntNotification.useNotification()
+  const message = useGlobalMessage()
+  const [notificationApi, contextHolder] = notification.useNotification()
 
   const forgotPasswordSchema = z.object({
     email: z
@@ -52,7 +54,7 @@ const ForgotPassword = () => {
   const onSubmit = (data: ForgotPasswordFormData) => {
     forgotPasswordMutation(data.email, {
       onSuccess: () => {
-        notification.success({
+        notificationApi.success({
           message: t('auth.forgotPassword.success'),
           description: t('auth.forgotPassword.successDescription'),
         })

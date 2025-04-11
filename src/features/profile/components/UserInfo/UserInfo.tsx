@@ -1,4 +1,5 @@
 import {useAuth} from '@/features/auth'
+import {useGlobalMessage} from '@/hooks'
 import {convertFileToBase64, type FileType} from '@/utils/fileUtils'
 import {zodResolver} from '@hookform/resolvers/zod'
 import ImgCrop from 'antd-img-crop'
@@ -8,7 +9,7 @@ import {useTranslation} from 'react-i18next'
 import {z} from 'zod'
 
 // Components
-import {Avatar, Button, Card, Dropdown, Form, Input, Spin, Upload, message} from 'antd'
+import {Avatar, Button, Card, Dropdown, Form, Input, Spin, Upload} from 'antd'
 import {AvatarContainer, FormGrid} from './UserInfo.style'
 
 // Services
@@ -21,18 +22,9 @@ import {EditOutlined, LoadingOutlined, UserOutlined} from '@ant-design/icons'
 import type {MenuProps, UploadProps} from 'antd'
 import type {AxiosError} from 'axios'
 
-const beforeUpload = (file: FileType) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
-  if (!isJpgOrPng) message.error('You can only upload JPG/PNG file!')
-
-  const isLt2M = file.size / 1024 / 1024 < 2
-  if (!isLt2M) message.error('Image must smaller than 2MB!')
-
-  return isJpgOrPng && isLt2M
-}
-
 const UserInfo = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const {currentUser, isLoading: isLoadingUser} = useAuth()
   const [isDeletedAvatar, setIsDeletedAvatar] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
@@ -63,6 +55,16 @@ const UserInfo = () => {
 
   const {mutateAsync: uploadAvatar, isPending: isUploadingAvatar} = useUploadAvatar()
   const {mutate: updateUser, isPending: isUpdatingUser} = useUpdateUser()
+
+  const beforeUpload = (file: FileType) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+    if (!isJpgOrPng) message.error('You can only upload JPG/PNG file!')
+
+    const isLt2M = file.size / 1024 / 1024 < 2
+    if (!isLt2M) message.error('Image must smaller than 2MB!')
+
+    return isJpgOrPng && isLt2M
+  }
 
   const onSubmit = async (data: UserInfoFormData) => {
     updateUser(data, {

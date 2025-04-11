@@ -135,6 +135,7 @@
     "deleteTodoConfirmationDescription": "\"{{title}}\" will be deleted permanently.",
     "deleteTodoSuccess": "Todo deleted successfully",
     "deleteTodoError": "Failed to delete todo",
+    "deleteTodoNotFound": "Todo not found",
     "add": {
       "placeholder": "Add a new todo..."
     },
