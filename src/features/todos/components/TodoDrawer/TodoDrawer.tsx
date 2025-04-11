@@ -1,31 +1,32 @@
+import {useGlobalMessage, useLanguage} from '@/hooks'
+import {useAppDispatch, useAppSelector} from '@/store'
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
-import {useAppDispatch, useAppSelector} from '@/store'
 import {closeDrawer} from '../../store/drawerSlice'
-import {useLanguage} from '@/hooks'
 
 // Components
-import {Button, Input, message, Popconfirm} from 'antd'
+import {Button, Input, Popconfirm} from 'antd'
 import {Drawer, TitleWrapper} from './TodoDrawer.style'
 
 // Services
-import {useTodoById} from '../../services/queries'
 import {
-  useUpdateTodo,
+  useDeleteTodo,
   useToggleCompletedTodo,
   useToggleImportantTodo,
-  useDeleteTodo,
+  useUpdateTodo,
 } from '../../services/mutations'
+import {useTodoById} from '../../services/queries'
 
 // Icons
-import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
+import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 
 // Types
 import type {TextAreaRef} from 'antd/es/input/TextArea'
 
 const TodoDrawer = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const {isRTL} = useLanguage()
   const dispatch = useAppDispatch()
   const {isOpen, selectedTodoId} = useAppSelector(state => state.drawer)
@@ -66,14 +67,16 @@ const TodoDrawer = () => {
     else if (note !== todo?.note) updateTodo({note})
   }
 
-  const handleDelete = () =>
-    deleteTodo(selectedTodoId || 0, {
+  const handleDelete = () => {
+    if (!selectedTodoId) return
+    deleteTodo(selectedTodoId, {
       onSuccess: () => {
         handleCancelConfirm()
         handleCloseDrawer()
         message.success(t('todos.edit.deleteTodoSuccess'))
       },
     })
+  }
 
   useEffect(() => {
     setTitle(todo?.title || '')
@@ -138,11 +141,11 @@ const TodoDrawer = () => {
       footer={renderFooter()}
     >
       <div>
-        <TitleWrapper>
+        <TitleWrapper isCompleted={todo?.isCompleted || false}>
           <Button
             type="text"
             style={{flexShrink: 0}}
-            onClick={() => toggleCompletedTodo(selectedTodoId || 0)}
+            onClick={() => selectedTodoId && toggleCompletedTodo(selectedTodoId)}
             icon={
               todo?.isCompleted ? (
                 <CheckCircleFilled style={{fontSize: '20px', color: 'var(--ant-color-primary)'}} />
@@ -174,7 +177,7 @@ const TodoDrawer = () => {
           <Button
             type="text"
             style={{flexShrink: 0}}
-            onClick={() => toggleImportantTodo(selectedTodoId || 0)}
+            onClick={() => selectedTodoId && toggleImportantTodo(selectedTodoId)}
             icon={
               todo?.isImportant ? (
                 <StarFilled style={{color: 'var(--ant-color-link)', fontSize: '20px'}} />

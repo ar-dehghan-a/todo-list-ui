@@ -7,9 +7,23 @@ interface SearchProps {
 }
 
 export const Menu = styled(AntMenu)`
-  margin-top: 45px;
   border-inline-end: none !important;
   background-color: transparent;
+  flex: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 `
 
 export const Search = styled(AntSearch, {

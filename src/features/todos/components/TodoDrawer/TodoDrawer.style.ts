@@ -22,7 +22,7 @@ export const Drawer = styled(AntDrawer)`
   }
 `
 
-export const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div<{isCompleted: boolean}>`
   z-index: 10;
   position: sticky;
   top: 0;
@@ -53,6 +53,7 @@ export const TitleWrapper = styled.div`
         display: block;
         font-weight: 500;
         font-size: 1.125rem;
+        text-decoration: ${({isCompleted}) => (isCompleted ? 'line-through' : 'none')};
       }
 
       .edit {

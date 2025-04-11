@@ -1,3 +1,4 @@
+import {useGlobalMessage} from '@/hooks'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {AxiosError} from 'axios'
@@ -8,7 +9,7 @@ import {z} from 'zod'
 import useAuth from '../hooks/useAuth'
 
 // Components
-import {Button, Card, Form, Input, Typography, message} from 'antd'
+import {Button, Card, Form, Input, Typography} from 'antd'
 
 // Services
 
@@ -26,10 +27,11 @@ const Box = styled(Card)`
 
 const SignUp = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const navigate = useNavigate()
   const {setToken} = useAuth()
 
-  const loginSchema = z
+  const registerSchema = z
     .object({
       name: z.string().min(1, t('auth.register.validation.name.required')),
       surname: z.string().min(1, t('auth.register.validation.surname.required')),
@@ -48,13 +50,13 @@ const SignUp = () => {
       path: ['confirmPassword'],
     })
 
-  type LoginFormData = z.infer<typeof loginSchema>
+  type RegisterFormData = z.infer<typeof registerSchema>
 
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<LoginFormData>({
+  } = useForm<RegisterFormData>({
     defaultValues: {
       name: '',
       surname: '',
@@ -62,12 +64,12 @@ const SignUp = () => {
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   })
 
   const {mutate: registerMutation, isPending} = useRegisterUser()
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = (data: RegisterFormData) => {
     registerMutation(data, {
       onSuccess: data => {
         message.success(t('auth.register.success'))
@@ -97,7 +99,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input
                 prefix={<UserOutlined />}
-                autoComplete="name"
+                autoComplete="given-name"
                 placeholder={t('auth.register.name')}
                 size="large"
                 {...field}
@@ -113,7 +115,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input
                 prefix={<UserOutlined />}
-                autoComplete="surname"
+                autoComplete="family-name"
                 placeholder={t('auth.register.surname')}
                 size="large"
                 {...field}
@@ -130,7 +132,7 @@ const SignUp = () => {
               <Input
                 prefix={<MailOutlined />}
                 autoComplete="email"
-                placeholder={t('auth.login.email')}
+                placeholder={t('auth.register.email')}
                 size="large"
                 {...field}
               />
@@ -145,8 +147,8 @@ const SignUp = () => {
             render={({field}) => (
               <Input.Password
                 prefix={<LockOutlined />}
-                autoComplete="current-password"
-                placeholder={t('auth.login.password')}
+                autoComplete="new-password"
+                placeholder={t('auth.register.password')}
                 size="large"
                 {...field}
               />
@@ -164,7 +166,7 @@ const SignUp = () => {
             render={({field}) => (
               <Input.Password
                 prefix={<LockOutlined />}
-                autoComplete="current-password"
+                autoComplete="new-password"
                 placeholder={t('auth.register.confirmPassword')}
                 size="large"
                 {...field}
@@ -178,7 +180,7 @@ const SignUp = () => {
         </Button>
       </Form>
 
-      <Link to="/auth/login" style={{display: 'block', marginTop: 10}}>
+      <Link to="/auth/login" style={{display: 'inline-block', marginTop: 10, fontSize: 12}}>
         {t('auth.register.alreadyHaveAccount')}
       </Link>
     </Box>

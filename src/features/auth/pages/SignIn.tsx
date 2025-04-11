@@ -1,3 +1,4 @@
+import {useGlobalMessage} from '@/hooks'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {AxiosError} from 'axios'
@@ -8,7 +9,7 @@ import {z} from 'zod'
 import useAuth from '../hooks/useAuth'
 
 // Components
-import {Button, Card, Form, Input, Typography, message} from 'antd'
+import {Button, Card, Form, Input, Typography} from 'antd'
 
 // Services
 import {useLoginUser} from '../services/mutations'
@@ -26,6 +27,7 @@ const Box = styled(Card)`
 
 const SignIn = () => {
   const {t} = useTranslation()
+  const message = useGlobalMessage()
   const navigate = useNavigate()
   const {setToken} = useAuth()
 
@@ -116,11 +118,18 @@ const SignIn = () => {
         </Button>
       </Form>
 
-      <Link to="/auth/forgot-password" style={{display: 'block', marginTop: 10}}>
-        {t('auth.login.forgotPassword')}
-      </Link>
-
-      <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
+          marginTop: 10,
+          fontSize: 12,
+        }}
+      >
+        <Link to="/auth/forgot-password">{t('auth.login.forgotPassword')}</Link>
+        <Link to="/auth/register">{t('auth.login.signUpLink')}</Link>
+      </div>
     </Box>
   )
 }

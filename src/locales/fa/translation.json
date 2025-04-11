@@ -5,13 +5,17 @@
   },
   "actions": {
     "create": "ایجاد",
+    "crop": "برش",
     "edit": "ویرایش",
     "delete": "حذف",
-    "cancel": "انصراف"
+    "cancel": "انصراف",
+    "remove": "حذف"
   },
   "sidebar": {
     "todos": "تودوها",
-    "important": "مهم"
+    "important": "مهم",
+    "profile": "پروفایل",
+    "logout": "خروج"
   },
   "notFound": {
     "title": "۴۰۴",
@@ -75,10 +79,63 @@
           "required": "تایید رمز عبور الزامی است",
           "match": "رمز عبور و تایید رمز عبور یکسان نیست"
         }
+      },
+      "success": "ثبت نام با موفقیت انجام شد",
+      "error": {
+        "emailExists": "ایمیل قبلا ثبت شده است",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      }
+    },
+    "forgotPassword": {
+      "title": "فراموشی رمز عبور",
+      "email": "ایمیل",
+      "send": "ارسال",
+      "success": "ایمیل با موفقیت ارسال شد",
+      "successDescription": "لطفا ایمیل خود را چک کنید",
+      "backToLogin": "بازگشت به صفحه ورود",
+      "error": {
+        "failedEmail": "مشکلی در ارسال ایمیل پیش آمده است. لطفا دوباره امتحان کنید",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
+      "validation": {
+        "email": {
+          "required": "ایمیل الزامی است",
+          "invalid": "لطفا یک ایمیل معتبر وارد کنید"
+        }
+      }
+    },
+    "resetPassword": {
+      "title": "بازیابی رمز عبور",
+      "newPassword": "رمز عبور جدید",
+      "confirmPassword": "تایید رمز عبور",
+      "submit": "ارسال",
+      "validation": {
+        "newPassword": {
+          "minLength": "رمز عبور باید حداقل ۸ کاراکتر باشد"
+        },
+        "confirmPassword": {
+          "required": "تایید رمز عبور الزامی است",
+          "match": "رمز عبور و تایید رمز عبور یکسان نیست"
+        }
+      },
+      "success": "رمز عبور با موفقیت بازیابی شد",
+      "error": {
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید",
+        "expiredToken": "لینک بازیابی رمز عبور شما منقضی شده است. لطفا دوباره امتحان کنید"
       }
     }
   },
   "todos": {
+    "Completed": "تکمیل شده {{count}}",
+    "markAsImportant": "مهم کن",
+    "markAsNotImportant": "مهم نکن",
+    "markAsCompleted": "انجام شده کن",
+    "markAsNotCompleted": "انجام نشده کن",
+    "deleteTodo": "حذف تودو",
+    "deleteTodoConfirmationDescription": "\"{{title}}\" به طور دائم حذف خواهد شد.",
+    "deleteTodoSuccess": "تودو با موفقیت حذف شد",
+    "deleteTodoError": "خطای سرور. لطفا دوباره امتحان کنید",
+    "deleteTodoNotFound": "تودو پیدا نشد",
     "add": {
       "placeholder": "یک تودو جدید اضافه کنید"
     },
@@ -90,5 +147,57 @@
       "notePlaceholder": "یادداشتی اضافه کنید"
     },
     "empty": "تودویی یافت نشد"
+  },
+  "profile": {
+    "updateUserInfo": {
+      "title": "اطلاعات پروفایل",
+      "updateSuccess": "پروفایل با موفقیت بروز شد",
+      "validation": {
+        "nameRequired": "نام باید حداقل ۲ کاراکتر باشد",
+        "surnameRequired": "نام خانوادگی باید حداقل ۲ کاراکتر باشد",
+        "emailInvalid": "ایمیل معتبر وارد کنید"
+      },
+      "error": {
+        "FileNotFound": "فایل یافت نشد",
+        "FileMustImage": "فایل باید یک عکس باشد",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
+      "uploadPhoto": "آپلود عکس",
+      "removePhoto": "حذف عکس",
+      "name": "نام",
+      "surname": "نام خانوادگی",
+      "email": "ایمیل",
+      "update": "بروز رسانی پروفایل"
+    },
+    "updateUserPassword": {
+      "title": "بروز رسانی رمز عبور",
+      "currentPassword": "رمز عبور فعلی",
+      "newPassword": "رمز عبور جدید",
+      "confirmPassword": "تایید رمز عبور",
+      "update": "بروز رسانی رمز عبور",
+      "validation": {
+        "currentPasswordRequired": "رمز عبور فعلی الزامی است",
+        "newPasswordRequired": "رمز عبور جدید الزامی است",
+        "confirmPasswordRequired": "تایید رمز عبور الزامی است",
+        "passwordsDoNotMatch": "رمز عبور و تایید رمز عبور یکسان نیست"
+      },
+      "error": {
+        "incorrectPassword": "رمز عبور فعلی اشتباه است",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
+      "success": "رمز عبور با موفقیت بروز شد"
+    },
+    "deleteUser": {
+      "title": "حذف حساب کاربری",
+      "description": "پس از حذف حساب کاربری شما، امکان بازگشت وجود ندارد. لطفا مطمئن شوید.",
+      "confirmTitle": "آیا مطمئن هستید که می‌خواهید حساب کاربری خود را حذف کنید؟",
+      "confirmContent": "این عملیات قابل بازگشت نیست. این کار حساب کاربری شما را به طور دائمی حذف کرده و اطلاعات شما را از سرورهای ما حذف خواهد کرد.",
+      "deleteButton": "حذف حساب کاربری",
+      "error": {
+        "userNotFound": "کاربر یافت نشد",
+        "serverError": "خطای سرور. لطفا دوباره امتحان کنید"
+      },
+      "success": "حساب کاربری با موفقیت حذف شد"
+    }
   }
 }
