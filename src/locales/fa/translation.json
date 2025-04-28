@@ -9,7 +9,8 @@
     "edit": "ویرایش",
     "delete": "حذف",
     "cancel": "انصراف",
-    "remove": "حذف"
+    "remove": "حذف",
+    "clear": "پاک کردن"
   },
   "sidebar": {
     "todos": "تودوها",

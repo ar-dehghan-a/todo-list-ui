@@ -9,7 +9,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "remove": "Remove"
+    "remove": "Remove",
+    "clear": "Clear"
   },
   "sidebar": {
     "todos": "Todos",
