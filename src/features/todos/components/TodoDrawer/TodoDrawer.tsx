@@ -2,7 +2,8 @@ import {useGlobalMessage, useLanguage} from '@/hooks'
 import {useAppDispatch, useAppSelector} from '@/store'
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
-import {closeDrawer} from '../../store/drawerSlice'
+import {useNavigate, useParams} from 'react-router-dom'
+import {closeDrawer, openDrawer} from '../../store/drawerSlice'
 
 // Components
 import {Button, Input, Popconfirm} from 'antd'
@@ -26,6 +27,8 @@ import type {TextAreaRef} from 'antd/es/input/TextArea'
 
 const TodoDrawer = () => {
   const {t} = useTranslation()
+  const {id} = useParams()
+  const navigate = useNavigate()
   const message = useGlobalMessage()
   const {isRTL} = useLanguage()
   const dispatch = useAppDispatch()
@@ -47,6 +50,7 @@ const TodoDrawer = () => {
 
   const todo = data?.data
 
+  const handleOpenDrawer = (id: number) => dispatch(openDrawer(id))
   const handleCloseDrawer = () => dispatch(closeDrawer())
   const handleOpenConfirm = () => setOpenDeleteConfirm(true)
   const handleCancelConfirm = () => setOpenDeleteConfirm(false)
@@ -91,11 +95,18 @@ const TodoDrawer = () => {
     }
   }, [isEditing])
 
+  useEffect(() => {
+    const todoId = Number(id)
+    if (!isNaN(todoId)) handleOpenDrawer(todoId)
+    else handleCloseDrawer()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
   const renderFooter = () => (
     <>
       <Button
         type="text"
-        onClick={handleCloseDrawer}
+        onClick={() => navigate('/todos')}
         icon={<PanelCloseOutlined style={{fontSize: '20px', rotate: isRTL ? '180deg' : '0deg'}} />}
       />
 
@@ -136,7 +147,7 @@ const TodoDrawer = () => {
       closeIcon={false}
       destroyOnClose
       open={isOpen}
-      onClose={handleCloseDrawer}
+      onClose={() => navigate('/todos')}
       placement={isRTL ? 'left' : 'right'}
       footer={renderFooter()}
     >

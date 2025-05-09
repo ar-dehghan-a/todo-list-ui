@@ -1,8 +1,7 @@
 import {useGlobalMessage, useLanguage} from '@/hooks'
-import {useAppDispatch} from '@/store'
 import {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
-import {openDrawer} from '../../store/drawerSlice'
+import {useNavigate} from 'react-router-dom'
 
 // Components
 import {Button, Checkbox, Dropdown, Flex, Modal, Space, Typography} from 'antd'
@@ -36,8 +35,8 @@ interface TodoItemProps {
 
 const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoItemProps) => {
   const {t} = useTranslation()
+  const navigate = useNavigate()
   const message = useGlobalMessage()
-  const dispatch = useAppDispatch()
   const [isDeleting, setIsDeleting] = useState(false)
   const {isRTL} = useLanguage()
 
@@ -98,8 +97,6 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoIt
     toggleImportantTodo(id)
   }
 
-  const handleContainerClick = () => dispatch(openDrawer(id))
-
   const handleCancelDelete = () => setIsDeleting(false)
 
   const handleDelete = () => {
@@ -119,7 +116,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoIt
   return (
     <>
       <Dropdown menu={{items: contextMenuItems}} trigger={['contextMenu']} destroyPopupOnHide>
-        <Container onClick={handleContainerClick}>
+        <Container onClick={() => navigate(`/todos/${id}`)}>
           <Checkbox
             checked={isCompleted}
             onClick={e => e.stopPropagation()}
