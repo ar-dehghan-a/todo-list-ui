@@ -24,6 +24,11 @@ const API_ENDPOINTS = {
   UPLOAD: {
     UPLOAD_FILE: '/files/upload',
   },
+  SUBSCRIPTIONS: {
+    PUBLIC_KEY: '/subscription/public-key',
+    SUBSCRIBE: '/subscription/subscribe',
+    // UNSUBSCRIBE: '/subscriptions/unsubscribe',
+  },
 }
 
 export default API_ENDPOINTS

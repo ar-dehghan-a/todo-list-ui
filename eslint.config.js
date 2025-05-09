@@ -31,7 +31,7 @@ export default tseslint.config(
           ],
         },
       ],
-      'no-console': ['warn', {allow: ['warn', 'error']}],
+      'no-console': ['warn', {allow: ['info', 'warn', 'error']}],
       '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
     },
   }
