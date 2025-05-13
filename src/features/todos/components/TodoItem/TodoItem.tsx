@@ -1,12 +1,11 @@
-import {useGlobalMessage} from '@/hooks'
-import {useAppDispatch} from '@/store'
-import {useState} from 'react'
+import {useGlobalMessage, useLanguage} from '@/hooks'
+import {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
-import {openDrawer} from '../../store/drawerSlice'
+import {useNavigate} from 'react-router-dom'
 
 // Components
-import {Button, Checkbox, Dropdown, Flex, Modal, Typography} from 'antd'
-import {Container, StarButton, Title} from './TodoItem.style'
+import {Button, Checkbox, Dropdown, Flex, Modal, Space, Typography} from 'antd'
+import {Container, DueDateWrapper, StarButton, Title} from './TodoItem.style'
 
 // Services
 import {
@@ -17,7 +16,13 @@ import {
 
 // Icons
 import {CircleOutlined} from '@/assets/icons'
-import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
+import {
+  CalendarOutlined,
+  CheckCircleFilled,
+  DeleteOutlined,
+  StarFilled,
+  StarOutlined,
+} from '@ant-design/icons'
 
 // Types
 import type {Todo} from '@/@types/todo'
@@ -28,15 +33,62 @@ interface TodoItemProps {
   todo: Todo
 }
 
-const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) => {
+const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoItemProps) => {
   const {t} = useTranslation()
+  const navigate = useNavigate()
   const message = useGlobalMessage()
-  const dispatch = useAppDispatch()
   const [isDeleting, setIsDeleting] = useState(false)
+  const {isRTL} = useLanguage()
 
   const {mutate: toggleCompletedTodo} = useToggleCompletedTodo()
   const {mutate: toggleImportantTodo} = useToggleImportantTodo()
   const {mutate: deleteTodo, isPending} = useDeleteTodo()
+
+  // Generate context menu items
+  const contextMenuItems: MenuProps['items'] = useMemo(
+    () => [
+      {
+        key: 'important',
+        label: isImportant ? t('todos.markAsNotImportant') : t('todos.markAsImportant'),
+        icon: isImportant ? <StarOutlined /> : <StarFilled />,
+        onClick: () => toggleImportantTodo(id),
+      },
+      {
+        key: 'completed',
+        label: isCompleted ? t('todos.markAsNotCompleted') : t('todos.markAsCompleted'),
+        icon: isCompleted ? <CircleOutlined style={{fontSize: '15px'}} /> : <CheckCircleFilled />,
+        onClick: () => toggleCompletedTodo(id),
+      },
+      {
+        key: 'delete',
+        label: t('todos.deleteTodo'),
+        icon: <DeleteOutlined style={{color: 'var(--ant-color-error)'}} />,
+        onClick: () => setIsDeleting(true),
+      },
+    ],
+    [id, isImportant, isCompleted, t, toggleImportantTodo, toggleCompletedTodo]
+  )
+
+  // Calculate due date text
+  const dueDateText = useMemo(() => {
+    if (!dueDate) return null
+
+    const newDueDate = new Date(dueDate)
+    const today = new Date()
+    const normalize = (date: Date) => date.setHours(0, 0, 0, 0)
+
+    const diff = normalize(newDueDate) - normalize(today)
+
+    if (diff === 0) return t('todos.today')
+    if (diff === 86400000) return t('todos.tomorrow')
+    if (diff === -86400000) return t('todos.yesterday')
+
+    return newDueDate.toLocaleDateString(isRTL ? 'fa-IR' : 'en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    })
+  }, [dueDate, isRTL, t])
 
   const handleCheckboxChange = () => toggleCompletedTodo(id)
 
@@ -45,9 +97,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
     toggleImportantTodo(id)
   }
 
-  const handleContainerClick = () => dispatch(openDrawer(id))
-
-  const handleCancel = () => setIsDeleting(false)
+  const handleCancelDelete = () => setIsDeleting(false)
 
   const handleDelete = () => {
     deleteTodo(id, {
@@ -63,31 +113,10 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
     setIsDeleting(false)
   }
 
-  const items: MenuProps['items'] = [
-    {
-      key: 'important',
-      label: isImportant ? t('todos.markAsNotImportant') : t('todos.markAsImportant'),
-      icon: isImportant ? <StarOutlined /> : <StarFilled />,
-      onClick: () => toggleImportantTodo(id),
-    },
-    {
-      key: 'completed',
-      label: isCompleted ? t('todos.markAsNotCompleted') : t('todos.markAsCompleted'),
-      icon: isCompleted ? <CircleOutlined style={{fontSize: '15px'}} /> : <CheckCircleFilled />,
-      onClick: () => toggleCompletedTodo(id),
-    },
-    {
-      key: 'delete',
-      label: t('todos.deleteTodo'),
-      icon: <DeleteOutlined style={{color: 'var(--ant-color-error)'}} />,
-      onClick: () => setIsDeleting(true),
-    },
-  ]
-
   return (
     <>
-      <Dropdown menu={{items}} trigger={['contextMenu']} destroyPopupOnHide>
-        <Container onClick={handleContainerClick}>
+      <Dropdown menu={{items: contextMenuItems}} trigger={['contextMenu']} destroyPopupOnHide>
+        <Container onClick={() => navigate(`/todos/${id}`)}>
           <Checkbox
             checked={isCompleted}
             onClick={e => e.stopPropagation()}
@@ -95,6 +124,19 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
           />
 
           <Title isCompleted={isCompleted}>{title}</Title>
+
+          {dueDateText && (
+            <DueDateWrapper
+              redColor={[t('todos.today'), t('todos.tomorrow'), t('todos.yesterday')].includes(
+                dueDateText
+              )}
+            >
+              <Space size={4}>
+                <CalendarOutlined />
+                <Typography.Text type="secondary">{dueDateText}</Typography.Text>
+              </Space>
+            </DueDateWrapper>
+          )}
 
           <StarButton type="link" onClick={handleStarButtonClick}>
             {isImportant ? <StarFilled /> : <StarOutlined />}
@@ -105,7 +147,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
       <Modal
         title={<Typography.Title level={4}>{t('todos.deleteTodo')}</Typography.Title>}
         open={isDeleting}
-        onCancel={handleCancel}
+        onCancel={handleCancelDelete}
         closeIcon={null}
         footer={null}
       >
@@ -118,7 +160,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant}}: TodoItemProps) 
             {t('actions.delete')}
           </Button>
 
-          <Button onClick={handleCancel} disabled={isPending}>
+          <Button onClick={handleCancelDelete} disabled={isPending}>
             {t('actions.cancel')}
           </Button>
         </Flex>

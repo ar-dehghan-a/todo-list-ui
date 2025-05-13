@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import {DatePicker as AntDatePicker} from 'antd'
 import {PlusOutlined as AntPlusOutlined} from '@ant-design/icons'
 
 export const Container = styled.div`
@@ -36,6 +37,27 @@ export const Form = styled.form`
     line-height: 1.25;
     outline: none;
     padding: 14px 0 14px 8px;
+  }
+`
+
+export const DatePicker = styled(AntDatePicker)`
+  cursor: pointer;
+
+  .ant-picker-input input {
+    display: none;
+  }
+
+  .ant-picker-suffix {
+    margin-inline-start: unset;
+    font-size: 1.125rem;
+    color: ${props =>
+      props.value
+        ? 'var(--ant-date-picker-active-border-color)'
+        : 'var(--ant-button-default-color)'};
+  }
+
+  &:hover .ant-picker-suffix {
+    color: var(--ant-date-picker-active-border-color);
   }
 `
 

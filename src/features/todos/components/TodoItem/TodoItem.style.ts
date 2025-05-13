@@ -19,11 +19,23 @@ export const Container = styled.div`
 export const Title = styled.p<{isCompleted: boolean}>`
   margin-bottom: 0;
   margin-inline-start: 8px;
+  margin-inline-end: auto;
   text-decoration: ${({isCompleted}) => (isCompleted ? 'line-through' : 'none')};
 `
 
 export const StarButton = styled(Button)`
   font-size: 20px;
   padding: 6px;
-  margin-inline-start: auto;
+`
+
+export const DueDateWrapper = styled.span<{redColor: boolean}>`
+  margin-inline: 4px;
+  flex-shrink: 0;
+  color: ${({redColor}) => (redColor ? 'var(--ant-color-error-text)' : 'inherit')};
+
+  .ant-typography {
+    color: ${({redColor}) =>
+      redColor ? 'var(--ant-color-error-text)' : 'var(--ant-color-text-description)'};
+    font-size: 10px;
+  }
 `

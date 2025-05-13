@@ -9,7 +9,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "cancel": "Cancel",
-    "remove": "Remove"
+    "remove": "Remove",
+    "clear": "Clear"
   },
   "sidebar": {
     "todos": "Todos",
@@ -131,6 +132,9 @@
     "markAsNotImportant": "Mark as not important",
     "markAsCompleted": "Mark as completed",
     "markAsNotCompleted": "Mark as not completed",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday",
     "deleteTodo": "Delete todo",
     "deleteTodoConfirmationDescription": "\"{{title}}\" will be deleted permanently.",
     "deleteTodoSuccess": "Todo deleted successfully",

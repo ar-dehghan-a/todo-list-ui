@@ -9,7 +9,8 @@
     "edit": "ویرایش",
     "delete": "حذف",
     "cancel": "انصراف",
-    "remove": "حذف"
+    "remove": "حذف",
+    "clear": "پاک کردن"
   },
   "sidebar": {
     "todos": "تودوها",
@@ -131,6 +132,9 @@
     "markAsNotImportant": "مهم نکن",
     "markAsCompleted": "انجام شده کن",
     "markAsNotCompleted": "انجام نشده کن",
+    "today": "امروز",
+    "tomorrow": "فردا",
+    "yesterday": "دیروز",
     "deleteTodo": "حذف تودو",
     "deleteTodoConfirmationDescription": "\"{{title}}\" به طور دائم حذف خواهد شد.",
     "deleteTodoSuccess": "تودو با موفقیت حذف شد",

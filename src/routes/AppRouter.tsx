@@ -40,7 +40,9 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={protectedLayout}>
           <Route index element={<Navigate to="/todos" replace />} />
-          <Route path="todos" element={<TodosPage />} />
+          <Route path="todos" element={<TodosPage />}>
+            <Route path=":id" element={<TodosPage />} />
+          </Route>
           <Route path="important" element={<ImportantPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />

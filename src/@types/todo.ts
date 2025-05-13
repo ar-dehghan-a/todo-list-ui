@@ -4,6 +4,7 @@ export interface Todo {
   note?: string
   isCompleted: boolean
   isImportant: boolean
+  dueDate: string | null
   doneAt?: string
   createdAt: string
 }

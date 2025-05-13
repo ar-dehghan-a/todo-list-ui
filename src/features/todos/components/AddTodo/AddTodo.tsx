@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 
 // Components
-import {Button} from 'antd'
-import {Container, Form} from './AddTodo.style'
+import {Button, Flex} from 'antd'
+import {Container, DatePicker, Form} from './AddTodo.style'
 
 // Services
 import {useCreateTodo} from '../../services/mutations'
@@ -13,16 +13,17 @@ import {PlusOutlined} from '@ant-design/icons'
 
 const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => {
   const {t} = useTranslation()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [date, setDate] = useState<Date | null>(null)
 
   const {mutate: createTodo, isPending} = useCreateTodo()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const input: HTMLInputElement | null = e.currentTarget.querySelector('input[name="todo"]')
 
-    if (!input) return
+    if (!inputRef.current) return
 
-    const title = input.value
+    const title = inputRef.current.value
 
     if (!title.trim()) return
 
@@ -30,16 +31,23 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
       {
         title,
         ...(createAsImportant ? {isImportant: true} : {}),
+        ...(date ? {dueDate: new Date(date).toISOString()} : {}),
       },
       {
         onSuccess() {
-          input.value = ''
+          if (inputRef.current) inputRef.current.value = ''
+          setDate(null)
           setTimeout(() => {
-            if (input) input.focus()
+            if (inputRef.current) inputRef.current.focus()
           }, 0)
         },
       }
     )
+  }
+
+  const handleDateChange = (date: unknown) => {
+    setDate(date as Date)
+    if (inputRef.current) inputRef.current.focus()
   }
 
   return (
@@ -48,10 +56,25 @@ const AddTodo = ({createAsImportant = false}: {createAsImportant?: boolean}) => 
         <Button icon={<PlusOutlined />} htmlType="submit" size="small" />
 
         <input
+          ref={inputRef}
           disabled={isPending}
           name="todo"
           autoComplete="off"
           placeholder={t('todos.add.placeholder')}
+        />
+
+        <DatePicker
+          allowClear={false}
+          variant="borderless"
+          value={date}
+          onChange={handleDateChange}
+          renderExtraFooter={() => (
+            <Flex align="center" justify="center" style={{padding: '3px 0'}}>
+              <Button color="blue" variant="link" onClick={() => setDate(null)}>
+                {t('actions.clear')}
+              </Button>
+            </Flex>
+          )}
         />
       </Form>
     </Container>
