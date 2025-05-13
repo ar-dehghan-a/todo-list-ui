@@ -1,12 +1,13 @@
 import {useGlobalMessage, useLanguage} from '@/hooks'
 import {useAppDispatch, useAppSelector} from '@/store'
+import dayjs from 'dayjs'
 import {useEffect, useRef, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useNavigate, useParams} from 'react-router-dom'
 import {closeDrawer, openDrawer} from '../../store/drawerSlice'
 
 // Components
-import {Button, Input, Popconfirm} from 'antd'
+import {Button, DatePicker, Flex, Input, Popconfirm} from 'antd'
 import {Drawer, TitleWrapper} from './TodoDrawer.style'
 
 // Services
@@ -23,6 +24,7 @@ import {CircleOutlined, PanelCloseOutlined} from '@/assets/icons'
 import {CheckCircleFilled, DeleteOutlined, StarFilled, StarOutlined} from '@ant-design/icons'
 
 // Types
+import type {DatePickerProps} from 'antd'
 import type {TextAreaRef} from 'antd/es/input/TextArea'
 
 const TodoDrawer = () => {
@@ -52,26 +54,25 @@ const TodoDrawer = () => {
 
   const handleOpenDrawer = (id: number) => dispatch(openDrawer(id))
   const handleCloseDrawer = () => dispatch(closeDrawer())
+
   const handleOpenConfirm = () => setOpenDeleteConfirm(true)
   const handleCancelConfirm = () => setOpenDeleteConfirm(false)
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)
-  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNote(e.target.value)
-
   const handleTitleClick = () => setIsEditing(true)
-
+  const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)
   const handleTitleBlur = () => {
     if (title === '') setTitle(todo?.title || '')
     else if (title !== todo?.title) updateTodo({title})
     setIsEditing(false)
   }
 
+  const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNote(e.target.value)
   const handleNoteBlur = () => {
     if (note === '') setNote(todo?.note || '')
     else if (note !== todo?.note) updateTodo({note})
   }
 
-  const handleDelete = () => {
+  const handleDeleteTodo = () => {
     if (!selectedTodoId) return
     deleteTodo(selectedTodoId, {
       onSuccess: () => {
@@ -80,6 +81,10 @@ const TodoDrawer = () => {
         message.success(t('todos.edit.deleteTodoSuccess'))
       },
     })
+  }
+
+  const handleDateChange: DatePickerProps['onChange'] = date => {
+    updateTodo({dueDate: date.toISOString()})
   }
 
   useEffect(() => {
@@ -125,7 +130,7 @@ const TodoDrawer = () => {
         title={t('todos.edit.deleteTodoConfirmationTitle')}
         description={t('todos.edit.deleteTodoConfirmationDescription')}
         open={openDeleteConfirm}
-        onConfirm={handleDelete}
+        onConfirm={handleDeleteTodo}
         onCancel={handleCancelConfirm}
         okText={t('actions.delete')}
         okButtonProps={{loading: isDeleting, type: 'primary', danger: true}}
@@ -201,15 +206,22 @@ const TodoDrawer = () => {
 
         <br />
 
-        <Input.TextArea
-          value={note}
-          onChange={handleNoteChange}
-          onBlur={handleNoteBlur}
-          placeholder={t('todos.edit.notePlaceholder')}
-          autoSize={{minRows: 3, maxRows: 5}}
-          showCount
-          maxLength={250}
-        />
+        <Flex gap={8} vertical>
+          <DatePicker
+            value={todo?.dueDate ? dayjs(todo?.dueDate) : null}
+            onChange={handleDateChange}
+          />
+
+          <Input.TextArea
+            value={note}
+            onChange={handleNoteChange}
+            onBlur={handleNoteBlur}
+            placeholder={t('todos.edit.notePlaceholder')}
+            autoSize={{minRows: 3, maxRows: 5}}
+            showCount
+            maxLength={250}
+          />
+        </Flex>
       </div>
     </Drawer>
   )

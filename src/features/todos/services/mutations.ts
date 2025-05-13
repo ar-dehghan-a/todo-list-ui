@@ -2,6 +2,9 @@ import {useMutation, useQueryClient} from '@tanstack/react-query'
 import QUERY_KEYS from '@/services/queryKeys'
 import {createTodo, updateTodo, deleteTodo, toggleCompletedTodo, toggleImportantTodo} from './api'
 
+// Types
+import {Todo} from '@/@types/todo'
+
 export const useCreateTodo = () => {
   const queryClient = useQueryClient()
 
@@ -15,7 +18,7 @@ export const useUpdateTodo = (id: number) => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (updates: Partial<{title: string; note: string}>) => updateTodo(id, updates),
+    mutationFn: (updates: Partial<Todo>) => updateTodo(id, updates),
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, id], result)
       queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
