@@ -3,7 +3,8 @@ import {ThemeProvider} from '@emotion/react'
 import {ConfigProvider as AntProvider} from 'antd'
 import {ErrorBoundary} from 'react-error-boundary'
 import {darkThemeConfig, lightThemeConfig} from './config/theme'
-import {GlobalMessageProvider, useLanguage, useServiceWorker} from './hooks'
+import {useLanguage, useServiceWorker} from './hooks'
+import {GlobalMessageProvider} from './providers'
 import AppRouter from './routes/AppRouter'
 
 // Locales

@@ -1,4 +1,5 @@
-import {useGlobalMessage, useLanguage} from '@/hooks'
+import {useLanguage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import {useAppDispatch, useAppSelector} from '@/store'
 import dayjs from 'dayjs'
 import {useEffect, useRef, useState} from 'react'
@@ -45,12 +46,12 @@ const TodoDrawer = () => {
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false)
 
   const {data} = useTodoById(selectedTodoId || 0)
+  const todo = data?.data
+
   const {mutate: updateTodo} = useUpdateTodo(selectedTodoId || 0)
   const {mutate: toggleImportantTodo} = useToggleImportantTodo()
   const {mutate: toggleCompletedTodo} = useToggleCompletedTodo()
   const {mutate: deleteTodo, isPending: isDeleting} = useDeleteTodo()
-
-  const todo = data?.data
 
   const handleOpenDrawer = (id: number) => dispatch(openDrawer(id))
   const handleCloseDrawer = () => dispatch(closeDrawer())
@@ -64,6 +65,10 @@ const TodoDrawer = () => {
     if (title === '') setTitle(todo?.title || '')
     else if (title !== todo?.title) updateTodo({title})
     setIsEditing(false)
+  }
+
+  const handleDateChange: DatePickerProps['onChange'] = date => {
+    updateTodo({dueDate: date.toISOString()})
   }
 
   const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNote(e.target.value)
@@ -81,10 +86,6 @@ const TodoDrawer = () => {
         message.success(t('todos.edit.deleteTodoSuccess'))
       },
     })
-  }
-
-  const handleDateChange: DatePickerProps['onChange'] = date => {
-    updateTodo({dueDate: date.toISOString()})
   }
 
   useEffect(() => {

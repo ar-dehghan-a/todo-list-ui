@@ -1,4 +1,5 @@
-import {useGlobalMessage, useLanguage} from '@/hooks'
+import {useLanguage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useNavigate} from 'react-router-dom'

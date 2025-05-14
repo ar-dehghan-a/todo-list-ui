@@ -1,4 +1,4 @@
-import {useGlobalMessage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {AxiosError} from 'axios'
