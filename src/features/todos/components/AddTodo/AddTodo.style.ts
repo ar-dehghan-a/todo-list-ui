@@ -10,6 +10,10 @@ export const Container = styled.div`
   z-index: 10;
   padding: 8px 50px;
   background-color: var(--ant-layout-body-bg);
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+  }
 `
 
 export const Form = styled.form`

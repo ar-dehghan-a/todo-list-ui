@@ -12,6 +12,13 @@ export const Layout = styled(AntLayout)`
 export const Sider = styled(AntLayout.Sider)`
   border-radius: 8px;
   padding: 10px 0;
+  transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
+
+  &.sidebar-sider-mobile {
+    position: fixed;
+    z-index: 999;
+    height: calc(100% - 16px);
+  }
 
   .ant-layout-sider-children {
     display: flex;
@@ -26,6 +33,11 @@ export const Header = styled(AntLayout.Header)`
   justify-content: end;
   background-color: transparent;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    gap: 0;
+    --ant-layout-header-padding: 0 16px;
+  }
 `
 
 export const Content = styled(AntLayout.Content)`
@@ -40,6 +52,10 @@ export const ToggleButton = styled(Button)`
   ${({theme}) => css`
     ${theme.dir === 'rtl' ? 'left: -12px;' : 'right: -12px;'}
   `}
+
+  &.sidebar-toggle-mobile {
+    transform: translateX(5px);
+  }
 `
 
 export const UserInfo = styled.div<{collapsed: boolean}>`
