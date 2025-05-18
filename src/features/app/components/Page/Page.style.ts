@@ -25,4 +25,8 @@ export const Wrapper = styled.div`
   &::-webkit-scrollbar-track {
     background: transparent;
   }
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
 `

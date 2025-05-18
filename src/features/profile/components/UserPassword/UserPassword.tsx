@@ -1,5 +1,5 @@
 import {useAuth} from '@/features/auth'
-import {useGlobalMessage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Controller, useForm} from 'react-hook-form'
 import {useTranslation} from 'react-i18next'

@@ -1,4 +1,5 @@
-import {useGlobalMessage, useLanguage} from '@/hooks'
+import {useLanguage, useResponsive} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import {useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useNavigate} from 'react-router-dom'
@@ -37,6 +38,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoIt
   const {t} = useTranslation()
   const navigate = useNavigate()
   const message = useGlobalMessage()
+  const {isMobile} = useResponsive()
   const [isDeleting, setIsDeleting] = useState(false)
   const {isRTL} = useLanguage()
 
@@ -125,7 +127,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoIt
 
           <Title isCompleted={isCompleted}>{title}</Title>
 
-          {dueDateText && (
+          {!isMobile && dueDateText && (
             <DueDateWrapper
               redColor={[t('todos.today'), t('todos.tomorrow'), t('todos.yesterday')].includes(
                 dueDateText

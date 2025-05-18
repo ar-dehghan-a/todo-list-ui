@@ -1,5 +1,5 @@
 import {useAuth} from '@/features/auth'
-import {useGlobalMessage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import {convertFileToBase64, type FileType} from '@/utils/fileUtils'
 import {zodResolver} from '@hookform/resolvers/zod'
 import ImgCrop from 'antd-img-crop'

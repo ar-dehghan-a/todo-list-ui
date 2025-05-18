@@ -1,5 +1,5 @@
 import {useAuth} from '@/features/auth'
-import {useLanguage} from '@/hooks'
+import {useLanguage, useResponsive} from '@/hooks'
 import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Outlet, useNavigate} from 'react-router-dom'
@@ -23,7 +23,8 @@ const MainLayout = () => {
   const navigate = useNavigate()
   const {isRTL} = useLanguage()
   const {currentUser} = useAuth()
-  const [collapsed, setCollapsed] = useState(false)
+  const {isDesktop, isTablet, isMobile} = useResponsive()
+  const [collapsed, setCollapsed] = useState(!isDesktop)
 
   const handleCollapse = () => setCollapsed(!collapsed)
 
@@ -49,7 +50,15 @@ const MainLayout = () => {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsed={collapsed} width={260}>
+      {isTablet && <div style={{width: '60px'}} />}
+
+      <Sider
+        trigger={null}
+        collapsed={collapsed}
+        width={250}
+        collapsedWidth={isMobile ? 0 : undefined}
+        className={!isDesktop ? 'sidebar-sider-mobile' : undefined}
+      >
         <ToggleButton
           shape="circle"
           icon={
@@ -66,6 +75,7 @@ const MainLayout = () => {
             )
           }
           onClick={handleCollapse}
+          className={isMobile && collapsed ? 'sidebar-toggle-mobile' : undefined}
         />
 
         <SidebarMenu collapsed={collapsed} />

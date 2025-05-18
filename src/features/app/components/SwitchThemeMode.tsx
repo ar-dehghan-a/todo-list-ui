@@ -1,7 +1,9 @@
-import {Button} from 'antd'
-import useTheme from '../hooks/useTheme'
 import {keyframes} from '@emotion/react'
 import styled from '@emotion/styled'
+import {Button} from 'antd'
+import useTheme from '../hooks/useTheme'
+
+// Icons
 import {MoonFilled as MoonFilledIcon, SunFilled as SunFilledIcon} from '@ant-design/icons'
 
 const animatedFade = keyframes`
@@ -19,19 +21,27 @@ export const SunFilled = styled(SunFilledIcon)`
   font-size: 24px !important;
   color: #f6d447;
   animation: ${animatedFade} 0.5s ease-in-out;
+
+  @media (max-width: 768px) {
+    font-size: 20px !important;
+  }
 `
 
 export const MoonFilled = styled(MoonFilledIcon)`
   font-size: 24px !important;
   color: #001529;
   animation: ${animatedFade} 0.5s ease-in-out;
+
+  @media (max-width: 768px) {
+    font-size: 20px !important;
+  }
 `
 
 const SwitchThemeMode = () => {
   const {isDarkMode, toggleThemeMode} = useTheme()
 
   return (
-    <Button color="default" variant="link" onClick={toggleThemeMode}>
+    <Button variant="link" color="default" onClick={toggleThemeMode} size="small">
       {isDarkMode ? <SunFilled /> : <MoonFilled />}
     </Button>
   )

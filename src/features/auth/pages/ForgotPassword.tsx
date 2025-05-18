@@ -1,4 +1,4 @@
-import {useGlobalMessage} from '@/hooks'
+import {useGlobalMessage} from '@/providers'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {AxiosError} from 'axios'
@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import {z} from 'zod'
 
 // Components
-import {notification, Button, Card, Form, Input, Typography} from 'antd'
+import {Button, Card, Form, Input, notification, Typography} from 'antd'
 
 // Services
 import {useForgotPassword} from '../services/mutations'

@@ -13,12 +13,11 @@ import {StarFilled} from '@ant-design/icons'
 
 const Important = () => {
   const {t} = useTranslation()
-  const {data} = useTodos({isImportant: true})
-  const important = data?.data || []
+  const {data: important} = useTodos({isImportant: true})
 
   return (
     <Page title={t('sidebar.important')} Icon={<StarFilled />}>
-      <TodoList todos={important} />
+      <TodoList todos={important || []} />
       <AddTodo createAsImportant />
     </Page>
   )
