@@ -13,6 +13,7 @@ export const useTodos = (
   return useQuery({
     queryFn: () => fetchTodos(params),
     queryKey: [QUERY_KEYS.TODOS, params],
+    select: data => data.data,
   })
 }
 

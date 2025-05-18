@@ -15,7 +15,7 @@ import {HomeFilled} from '@ant-design/icons'
 const Todos = () => {
   const {t} = useTranslation()
   const {data} = useTodos()
-  const todos = data?.data || []
+  const todos = data || []
 
   const uncompletedTodos = todos.filter(todo => !todo.isCompleted)
   const completedTodos = todos.filter(todo => todo.isCompleted)

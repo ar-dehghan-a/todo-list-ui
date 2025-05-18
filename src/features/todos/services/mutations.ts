@@ -10,7 +10,7 @@ export const useCreateTodo = () => {
 
   return useMutation({
     mutationFn: createTodo,
-    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]}),
+    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS], type: 'all'}),
   })
 }
 
@@ -21,7 +21,7 @@ export const useUpdateTodo = (id: number) => {
     mutationFn: (updates: Partial<Todo>) => updateTodo(id, updates),
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, id], result)
-      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS], type: 'all'})
     },
   })
 }
@@ -31,7 +31,7 @@ export const useDeleteTodo = () => {
 
   return useMutation({
     mutationFn: deleteTodo,
-    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]}),
+    onSuccess: () => queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS], type: 'all'}),
   })
 }
 
@@ -42,7 +42,7 @@ export const useToggleCompletedTodo = () => {
     mutationFn: toggleCompletedTodo,
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
-      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS], type: 'all'})
     },
   })
 }
@@ -54,7 +54,7 @@ export const useToggleImportantTodo = () => {
     mutationFn: toggleImportantTodo,
     onSuccess: result => {
       queryClient.setQueryData([QUERY_KEYS.TODO, result.data.id], result)
-      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS]})
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.TODOS], type: 'all'})
     },
   })
 }
