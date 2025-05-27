@@ -1,8 +1,10 @@
-import {ServerError, useTheme, useThemeWatcher} from '@/features/app'
+import {useTheme, useThemeWatcher} from '@/features/app'
 import {ThemeProvider} from '@emotion/react'
 import {ConfigProvider as AntProvider} from 'antd'
+import {lazy} from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 import {darkThemeConfig, lightThemeConfig} from './config/theme'
+import withLoading from './hocs/withLoading.hoc'
 import {useLanguage, useServiceWorker} from './hooks'
 import {GlobalMessageProvider} from './providers'
 import AppRouter from './routes/AppRouter'
@@ -13,6 +15,9 @@ import faIR from 'antd/locale/fa_IR'
 
 // Styles
 import GlobalStyles from './styles/GlobalStyles'
+
+const ServerError = lazy(() => import('@/features/app/pages/ServerError'))
+const ServerErrorPage = withLoading(ServerError)
 
 const App = () => {
   const {isDarkMode} = useTheme()
@@ -31,7 +36,7 @@ const App = () => {
     >
       <ThemeProvider theme={{dir, isDarkMode}}>
         <GlobalStyles />
-        <ErrorBoundary FallbackComponent={ServerError}>
+        <ErrorBoundary FallbackComponent={ServerErrorPage}>
           <GlobalMessageProvider>
             <AppRouter />
           </GlobalMessageProvider>

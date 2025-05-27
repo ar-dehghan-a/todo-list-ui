@@ -1,10 +1,5 @@
 import authSlice, {clearToken} from './store/authSlice'
 
-// pages
-export {default as SignIn} from './pages/SignIn'
-export {default as SignUp} from './pages/SignUp'
-export {default as ForgotPassword} from './pages/ForgotPassword'
-
 // layouts
 export {default as AuthLayout} from './layouts/AuthLayout'
 
