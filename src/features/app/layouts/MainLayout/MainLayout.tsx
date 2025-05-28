@@ -80,7 +80,7 @@ const MainLayout = () => {
 
         <SidebarMenu collapsed={collapsed} />
 
-        <Dropdown menu={{items, onClick}} trigger={['click']} destroyPopupOnHide>
+        <Dropdown menu={{items, onClick}} trigger={['click']} destroyOnHidden>
           <UserInfo collapsed={collapsed}>
             <Avatar
               src={currentUser?.photo}

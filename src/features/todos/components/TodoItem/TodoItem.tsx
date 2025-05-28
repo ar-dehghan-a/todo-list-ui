@@ -117,7 +117,7 @@ const TodoItem = ({todo: {id, title, isCompleted, isImportant, dueDate}}: TodoIt
 
   return (
     <>
-      <Dropdown menu={{items: contextMenuItems}} trigger={['contextMenu']} destroyPopupOnHide>
+      <Dropdown menu={{items: contextMenuItems}} trigger={['contextMenu']} destroyOnHidden>
         <Container onClick={() => navigate(`/todos/${id}`)}>
           <Checkbox
             checked={isCompleted}
