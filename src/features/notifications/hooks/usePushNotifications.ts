@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react'
+import {useState} from 'react'
 import {urlBase64ToUint8Array} from '@/utils/binary'
 import {useGetPublicKey, useSubscribeToPushNotification} from '../services/mutations'
 
@@ -12,7 +12,7 @@ const usePushNotifications = () => {
   const {mutateAsync: getPublicKey} = useGetPublicKey()
   const {mutateAsync: subscribeToPushNotification} = useSubscribeToPushNotification()
 
-  const subscribe = useCallback(async () => {
+  const subscribe = async () => {
     setIsSubscribing(true)
     setError(null)
 
@@ -59,9 +59,7 @@ const usePushNotifications = () => {
     } finally {
       setIsSubscribing(false)
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
   return {
     subscribe,
