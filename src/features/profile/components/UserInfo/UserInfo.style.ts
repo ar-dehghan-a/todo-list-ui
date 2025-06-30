@@ -25,6 +25,7 @@ export const FormGrid = styled.div`
   gap: 16px;
 
   @media (max-width: 768px) {
+    gap: 0;
     grid-template-columns: 1fr;
   }
 `
