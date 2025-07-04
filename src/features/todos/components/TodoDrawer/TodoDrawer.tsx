@@ -151,7 +151,7 @@ const TodoDrawer = () => {
   return (
     <Drawer
       closeIcon={false}
-      destroyOnClose
+      destroyOnHidden
       open={isOpen}
       onClose={() => navigate('/todos')}
       placement={isRTL ? 'left' : 'right'}

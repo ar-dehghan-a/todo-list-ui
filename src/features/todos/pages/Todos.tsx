@@ -42,7 +42,7 @@ const Todos = () => {
         <Collapse
           ghost
           bordered={false}
-          defaultActiveKey={uncompletedTodos.length === 0 ? ['completed'] : []}
+          defaultActiveKey={['completed']}
           items={[
             {
               key: 'completed',
