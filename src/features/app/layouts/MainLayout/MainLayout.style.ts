@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 import {css} from '@emotion/react'
-import {Button, Layout as AntLayout} from 'antd'
+import {Button as AntButton, Layout as AntLayout} from 'antd'
 
 export const Layout = styled(AntLayout)`
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   padding: ${({theme}) => (theme.dir === 'ltr' ? '8px 4px 8px 8px' : '8px 8px 8px 4px')};
   gap: 16px;
 `
@@ -45,7 +45,7 @@ export const Content = styled(AntLayout.Content)`
   height: 100%;
 `
 
-export const ToggleButton = styled(Button)`
+export const ToggleButton = styled(AntButton)`
   position: absolute;
   top: 14px;
   z-index: 10;

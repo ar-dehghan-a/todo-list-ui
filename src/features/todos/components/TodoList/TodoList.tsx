@@ -14,6 +14,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-bottom: 64px;
 `
 
 const TodoList = ({todos}: TodoListProps) => {

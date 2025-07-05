@@ -3,7 +3,7 @@ import {Layout as AntLayout} from 'antd'
 
 export const Layout = styled(AntLayout)`
   width: 100vw;
-  height: 100vh;
+  min-height: 100dvh;
   padding: 8px;
 `
 
@@ -22,6 +22,7 @@ export const Footer = styled(AntLayout.Footer)`
   align-items: center;
   justify-content: center;
   direction: ltr;
+  margin-top: 32px;
   border-radius: 8px;
   gap: 8px;
 `
