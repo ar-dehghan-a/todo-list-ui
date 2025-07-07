@@ -5,7 +5,7 @@ interface UseServiceWorkerOptions {
   onSuccess?: (registration: ServiceWorkerRegistration) => void
 }
 
-const isProd = true // import.meta.env.NODE_ENV === 'production'
+const isProd = import.meta.env.NODE_ENV === 'production'
 
 const useServiceWorker = (options?: UseServiceWorkerOptions) => {
   useEffect(() => {
