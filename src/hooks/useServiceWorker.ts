@@ -5,11 +5,9 @@ interface UseServiceWorkerOptions {
   onSuccess?: (registration: ServiceWorkerRegistration) => void
 }
 
-const isProd = import.meta.env.NODE_ENV === 'production'
-
 const useServiceWorker = (options?: UseServiceWorkerOptions) => {
   useEffect(() => {
-    if (!isProd || !('serviceWorker' in navigator)) return
+    if (!('serviceWorker' in navigator)) return
 
     let idleCallbackId: number | null = null
     let timeoutId: ReturnType<typeof setTimeout> | null = null

@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: import.meta.env.NODE_ENV === 'production' ? false : true,
+    debug:  false,
     resources: {
       en: {translation: en},
       fa: {translation: fa},
