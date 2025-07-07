@@ -1,3 +1,4 @@
+import {usePushNotifications} from '@/features/notifications'
 import {useGlobalMessage} from '@/providers'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -10,14 +11,13 @@ import useAuth from '../hooks/useAuth'
 
 // Components
 import {Button, Card, Form, Input, Typography} from 'antd'
+const {Title} = Typography
 
 // Services
 import {useLoginUser} from '../services/mutations'
 
 // Icons
 import {LockOutlined, MailOutlined} from '@ant-design/icons'
-
-const {Title} = Typography
 
 const Box = styled(Card)`
   width: min(400px, 100%);
@@ -57,12 +57,14 @@ const SignIn = () => {
   })
 
   const {mutate: loginMutation, isPending} = useLoginUser()
+  const {subscribe} = usePushNotifications()
 
   const onSubmit = (data: LoginFormData) => {
     loginMutation(data, {
       onSuccess: data => {
         message.success(t('auth.login.success'))
         setToken(data.token)
+        subscribe()
         navigate('/todos')
       },
       onError: (error: unknown) => {

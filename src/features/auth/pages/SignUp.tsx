@@ -1,3 +1,4 @@
+import {usePushNotifications} from '@/features/notifications'
 import {useGlobalMessage} from '@/providers'
 import styled from '@emotion/styled'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -7,6 +8,7 @@ import {useTranslation} from 'react-i18next'
 import {Link, useNavigate} from 'react-router-dom'
 import {z} from 'zod'
 import useAuth from '../hooks/useAuth'
+import {useRegisterUser} from '../services/mutations'
 
 // Components
 import {Button, Card, Form, Input, Typography} from 'antd'
@@ -15,7 +17,6 @@ import {Button, Card, Form, Input, Typography} from 'antd'
 
 // Icons
 import {LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons'
-import {useRegisterUser} from '../services/mutations'
 
 const {Title} = Typography
 
@@ -68,12 +69,14 @@ const SignUp = () => {
   })
 
   const {mutate: registerMutation, isPending} = useRegisterUser()
+  const {subscribe} = usePushNotifications()
 
   const onSubmit = (data: RegisterFormData) => {
     registerMutation(data, {
       onSuccess: data => {
         message.success(t('auth.register.success'))
         setToken(data.token)
+        subscribe()
         navigate('/todos')
       },
       onError: (error: unknown) => {

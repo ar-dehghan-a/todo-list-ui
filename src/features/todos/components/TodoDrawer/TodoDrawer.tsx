@@ -68,7 +68,7 @@ const TodoDrawer = () => {
   }
 
   const handleDateChange: DatePickerProps['onChange'] = date => {
-    updateTodo({dueDate: date.toISOString()})
+    updateTodo({dueDate: date ? date.toISOString() : null})
   }
 
   const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setNote(e.target.value)
