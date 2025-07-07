@@ -1,10 +1,10 @@
 self.addEventListener('install', event => {
-  console.log('Service Worker installing...')
+  console.info('Service Worker installing...')
   self.skipWaiting()
 })
 
 self.addEventListener('activate', event => {
-  console.log('Service Worker activating...')
+  console.info('Service Worker activating...')
   event.waitUntil(self.clients.claim())
 })
 
@@ -22,10 +22,6 @@ self.addEventListener('push', function (event) {
           action: 'view',
           title: 'View Task',
         },
-        // {
-        //   action: 'complete',
-        //   title: 'Mark Complete',
-        // },
       ],
     }
 
