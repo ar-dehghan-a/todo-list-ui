@@ -1,3 +1,4 @@
+import {usePushNotifications} from '@/features/notifications'
 import {useEffect} from 'react'
 
 interface UseServiceWorkerOptions {
@@ -6,6 +7,8 @@ interface UseServiceWorkerOptions {
 }
 
 const useServiceWorker = (options?: UseServiceWorkerOptions) => {
+  const {subscribeWithoutPushRequest} = usePushNotifications()
+
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return
 
@@ -27,6 +30,7 @@ const useServiceWorker = (options?: UseServiceWorkerOptions) => {
           newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
               console.info('New update available!')
+              subscribeWithoutPushRequest()
               options?.onUpdate?.(registration)
             }
           })
@@ -60,6 +64,7 @@ const useServiceWorker = (options?: UseServiceWorkerOptions) => {
         clearTimeout(timeoutId)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options])
 }
 
