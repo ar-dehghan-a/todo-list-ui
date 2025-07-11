@@ -10,7 +10,16 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('push', function (event) {
   if (event.data) {
-    const data = event.data.json()
+    let data
+
+    try {
+      data = event.data.json()
+    } catch (e) {
+      data = {
+        title: 'Notification',
+        body: event.data.text(),
+      }
+    }
 
     const options = {
       body: data.body,
@@ -34,14 +43,15 @@ self.addEventListener('notificationclick', function (event) {
 
   if (event.action === 'view') {
     // Default action is to open the app
-    const urlToOpen = event.notification.data.url || '/'
+    const urlToOpen = event.notification.data.url || '/todos'
 
     event.waitUntil(
       clients.matchAll({type: 'window'}).then(function (clientList) {
         // Check if there's already a window open
         for (const client of clientList) {
-          if (client.url === urlToOpen && 'focus' in client) {
-            return client.focus()
+          if ('focus' in client && 'navigate' in client) {
+            client.focus()
+            return client.navigate(urlToOpen)
           }
         }
         // If no window is open, open a new one
