@@ -28,6 +28,9 @@ const ForgotPasswordPage = withLoading(ForgotPassword)
 const ResetPasswordPage = withLoading(ResetPassword)
 const LogoutPage = withLoading(Logout)
 
+const Test = lazy(() => import('@/features/todos/pages/Test'))
+const TestPage = withLoading(Test)
+
 const AppRouter = () => {
   const protectedLayout = (
     <RequireAuth>
@@ -44,6 +47,7 @@ const AppRouter = () => {
             <Route path=":id" element={<TodosPage />} />
           </Route>
           <Route path="important" element={<ImportantPage />} />
+          <Route path="test" element={<TestPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
