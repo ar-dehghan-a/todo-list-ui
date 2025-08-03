@@ -3,6 +3,7 @@ import {css} from '@emotion/react'
 import {Button as AntButton, Layout as AntLayout} from 'antd'
 
 export const Layout = styled(AntLayout)`
+  position: relative;
   width: 100%;
   height: 100dvh;
   padding: ${({theme}) => (theme.dir === 'ltr' ? '8px 4px 8px 8px' : '8px 8px 8px 4px')};
@@ -25,6 +26,16 @@ export const Sider = styled(AntLayout.Sider)`
     flex-direction: column;
     gap: 8px;
   }
+`
+
+export const Overlay = styled.div<{collapsed: boolean}>`
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: ${({collapsed}) => (collapsed ? 0 : 0.7)};
+  visibility: ${({collapsed}) => (collapsed ? 'hidden' : 'visible')};
+  z-index: 20;
+  transition: all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);
 `
 
 export const Header = styled(AntLayout.Header)`
@@ -54,7 +65,7 @@ export const ToggleButton = styled(AntButton)`
   `}
 
   &.sidebar-toggle-mobile {
-    transform: translateX(5px);
+    transform: translateX(36px);
   }
 `
 

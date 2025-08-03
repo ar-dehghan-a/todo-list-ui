@@ -10,7 +10,7 @@ import {Layout as AntLayout, Avatar, Dropdown} from 'antd'
 import SidebarMenu from '../../components/SidebarMenu'
 import SwitchLanguage from '../../components/SwitchLanguage'
 import SwitchThemeMode from '../../components/SwitchThemeMode'
-import {Content, Header, Layout, Sider, ToggleButton, UserInfo} from './MainLayout.style'
+import {Content, Header, Layout, Overlay, Sider, ToggleButton, UserInfo} from './MainLayout.style'
 
 // Icons
 import {LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from '@ant-design/icons'
@@ -51,6 +51,8 @@ const MainLayout = () => {
   return (
     <Layout>
       {isTablet && <div style={{width: '60px'}} />}
+
+      {isMobile && <Overlay onClick={() => setCollapsed(true)} collapsed={collapsed} />}
 
       <Sider
         trigger={null}
